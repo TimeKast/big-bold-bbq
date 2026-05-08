@@ -1,9 +1,11 @@
 import { CtaButton } from "@/components/shared/CtaButton";
 import { PhoneLink } from "@/components/shared/PhoneLink";
+import { VideoLoop } from "@/components/shared/VideoLoop";
 import { site } from "@/lib/site";
 
 /**
  * Acto 9 — Final CTA. Full-bleed, charcoal, big phone, big quote button.
+ * V7 video: oak fire in a steel firepit, embers, smoke (Seedance 2.0, 5s 1080p).
  */
 export function FinalCTA() {
   return (
@@ -11,20 +13,30 @@ export function FinalCTA() {
       aria-labelledby="final-cta-title"
       className="relative bg-charcoal text-parchment py-28 md:py-40 overflow-hidden"
     >
-      {/* Atmospheric backdrop — V1 placeholder, real ambient video M3 */}
-      <div aria-hidden className="absolute inset-0">
+      {/* V7 ambient fire backdrop */}
+      <VideoLoop
+        src="/video/v7-fire-desktop.mp4"
+        srcMobile="/video/v7-fire-mobile.mp4"
+        poster="/video/v7-fire-poster.jpg"
+        ariaLabel="Oak fire and embers in a steel firepit"
+        className="absolute inset-0"
+      />
+
+      {/* Firebrick multiply overlay + vignette */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 50% at 50% 50%, rgba(158,47,35,0.4) 0%, transparent 60%), radial-gradient(ellipse 90% 70% at 50% 100%, rgba(214,162,90,0.25) 0%, transparent 50%)",
+              "linear-gradient(180deg, rgba(158,47,35,0.45) 0%, rgba(43,30,22,0.65) 70%, rgba(43,30,22,0.9) 100%)",
+            mixBlendMode: "multiply",
           }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, rgba(0,0,0,0.4) 100%)",
+              "radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, rgba(0,0,0,0.45) 100%)",
           }}
         />
       </div>

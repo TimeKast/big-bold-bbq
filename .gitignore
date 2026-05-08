@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw Seedance outputs (regenerable; encoded variants live in /public/video/)
+/scripts/raw-videos/*.mp4
+/scripts/raw-videos/*.thumb.jpg

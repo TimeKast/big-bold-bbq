@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
+import { VideoLoop } from "@/components/shared/VideoLoop";
 import { ArrowRight } from "lucide-react";
 
 /**
@@ -55,6 +56,52 @@ export function MenuPreview() {
             <br />
             a Creole and Cajun soul.
           </SectionHeading>
+        </Reveal>
+
+        {/* V3 brisket feature tile */}
+        <Reveal delay={120}>
+          <div className="mt-12 grid gap-6 lg:grid-cols-[2fr_3fr] items-stretch max-w-5xl">
+            <div className="aspect-square rounded-2xl overflow-hidden bg-charcoal relative shadow-2xl">
+              <VideoLoop
+                src="/video/v3-brisket.mp4"
+                poster="/video/v3-brisket-poster.jpg"
+                ariaLabel="Smoked brisket being sliced — pink smoke ring and juices"
+                className="absolute inset-0"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 50%, rgba(43,30,22,0.85) 100%)",
+                }}
+              />
+              <div className="absolute bottom-5 left-5 right-5 text-parchment">
+                <p className="text-warmgold uppercase tracking-[0.2em] text-[10px] font-bold">
+                  Signature
+                </p>
+                <p className="font-display text-2xl md:text-3xl mt-1">
+                  Slow-Smoked Brisket
+                </p>
+                <p className="text-parchment/80 text-sm mt-1">
+                  16–18 hours over hickory.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center">
+              <p className="font-display text-2xl md:text-3xl text-hickory text-balance">
+                Bark you can feel.
+                <br />
+                Pink smoke ring you can see.
+              </p>
+              <p className="mt-4 text-base md:text-lg text-hickory/80 max-w-xl">
+                Every brisket sits on the pit overnight. We trim by hand, season
+                with our family rub, and let hickory do the work. By morning,
+                it&apos;s tender enough to pull apart with a fork — but you&apos;ll want
+                a knife so you can see the smoke ring.
+              </p>
+            </div>
+          </div>
         </Reveal>
 
         <div className="mt-16 grid gap-px bg-hickory/15 max-w-4xl border border-hickory/15 rounded-lg overflow-hidden">

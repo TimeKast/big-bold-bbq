@@ -1,11 +1,11 @@
 import { CtaButton } from "@/components/shared/CtaButton";
 import { PhoneLink } from "@/components/shared/PhoneLink";
+import { VideoLoop } from "@/components/shared/VideoLoop";
 import { Flame } from "lucide-react";
 
 /**
  * Acto 1 — Hero (0-8% scroll). Full-bleed.
- * V1 placeholder: no real video yet. Animated gradient + ember layer simulates
- * the cinematic feel until the Seedance hero clip is generated and encoded GOP=1.
+ * V1 video: brisket + smoke + ember firebox dolly-in (Seedance 2.0, 6s 720p).
  * Plan §2 narrative architecture acto 1.
  */
 export function Hero() {
@@ -14,37 +14,31 @@ export function Hero() {
       className="relative min-h-[100svh] flex flex-col justify-end overflow-hidden bg-charcoal text-parchment"
       aria-labelledby="hero-title"
     >
-      {/* Background — placeholder ember/fire gradient */}
-      <div aria-hidden className="absolute inset-0">
-        {/* Base layer: deep charcoal */}
-        <div className="absolute inset-0 bg-charcoal" />
-        {/* Heat/fire glow from bottom */}
+      {/* Background — Seedance V1 hero clip */}
+      <VideoLoop
+        src="/video/v1-hero-desktop.mp4"
+        srcMobile="/video/v1-hero-mobile.mp4"
+        poster="/video/v1-hero-poster.jpg"
+        ariaLabel="Smoked brisket resting on a hickory pit, smoke drifting in the firebox glow"
+        className="absolute inset-0"
+      />
+
+      {/* Tinted vignette for legibility of headline */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 90% 50% at 50% 100%, rgba(214,162,90,0.28) 0%, rgba(158,47,35,0.18) 30%, transparent 65%)",
+              "linear-gradient(180deg, rgba(43,30,22,0.25) 0%, rgba(43,30,22,0.55) 65%, rgba(43,30,22,0.85) 100%)",
           }}
         />
-        {/* Subtle vignette */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%)",
+              "radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.45) 100%)",
           }}
         />
-        {/* Smoke wisps suggestion */}
-        <div className="absolute inset-0 opacity-30 mix-blend-screen">
-          <div
-            className="absolute inset-0 animate-pulse"
-            style={{
-              background:
-                "radial-gradient(circle at 20% 80%, rgba(244,230,207,0.15) 0%, transparent 25%), radial-gradient(circle at 80% 60%, rgba(244,230,207,0.1) 0%, transparent 30%)",
-              animationDuration: "8s",
-            }}
-          />
-        </div>
       </div>
 
       {/* Content */}
