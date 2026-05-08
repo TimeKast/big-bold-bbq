@@ -104,6 +104,61 @@ export function MenuPreview() {
           </div>
         </Reveal>
 
+        {/* V4 / V5 / V6 macro tiles */}
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl">
+          {[
+            {
+              src: "/video/v4-pulled-pork.mp4",
+              poster: "/video/v4-pulled-pork-poster.jpg",
+              alt: "Pulled pork being separated with a fork",
+              eyebrow: "Pulled Pork",
+              title: "Cherry-wood smoke. Pulled by hand.",
+            },
+            {
+              src: "/video/v5-ribs.mp4",
+              poster: "/video/v5-ribs-poster.jpg",
+              alt: "Smoked ribs being placed on a white ceramic plate",
+              eyebrow: "St. Louis Ribs",
+              title: "Fall off the bone. Glaze-finished.",
+            },
+            {
+              src: "/video/v6-mac.mp4",
+              poster: "/video/v6-mac-poster.jpg",
+              alt: "Three-cheese mac and cheese bubbling in a cast-iron skillet",
+              eyebrow: "Mac & Cheese",
+              title: "Three cheeses. Cast-iron crust.",
+            },
+          ].map((tile, idx) => (
+            <Reveal key={tile.eyebrow} delay={idx * 80}>
+              <div className="aspect-square rounded-xl overflow-hidden bg-charcoal relative shadow-lg group">
+                <VideoLoop
+                  src={tile.src}
+                  poster={tile.poster}
+                  ariaLabel={tile.alt}
+                  className="absolute inset-0"
+                  loopFadeMs={400}
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 45%, rgba(43,30,22,0.8) 100%)",
+                  }}
+                />
+                <div className="absolute bottom-4 left-4 right-4 text-parchment">
+                  <p className="text-warmgold uppercase tracking-[0.2em] text-[10px] font-bold">
+                    {tile.eyebrow}
+                  </p>
+                  <p className="font-display text-lg sm:text-xl mt-1 text-balance">
+                    {tile.title}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
         <div className="mt-16 grid gap-px bg-hickory/15 max-w-4xl border border-hickory/15 rounded-lg overflow-hidden">
           {items.map((item, idx) => (
             <Reveal key={item.name} delay={idx * 50}>

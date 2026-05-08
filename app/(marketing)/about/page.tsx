@@ -4,6 +4,7 @@ import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
 import { PhoneLink } from "@/components/shared/PhoneLink";
+import { VideoLoop } from "@/components/shared/VideoLoop";
 import { Award } from "lucide-react";
 import { JsonLd, breadcrumbSchema } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
@@ -33,13 +34,28 @@ export default function AboutPage() {
       />
 
       {/* Hero */}
-      <section className="relative bg-charcoal text-parchment pt-40 pb-24 md:pt-48 md:pb-32">
-        <div aria-hidden className="absolute inset-0">
+      <section className="relative bg-charcoal text-parchment pt-40 pb-24 md:pt-48 md:pb-32 overflow-hidden">
+        <VideoLoop
+          src="/video/v8-hearth-desktop.mp4"
+          srcMobile="/video/v8-hearth-mobile.mp4"
+          poster="/video/v8-hearth-poster.jpg"
+          ariaLabel="Wood-fired hearth at golden hour, embers and warm bokeh"
+          className="absolute inset-0"
+          loopFadeMs={650}
+        />
+        <div aria-hidden className="absolute inset-0 pointer-events-none">
           <div
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 60% 60% at 30% 50%, rgba(214,162,90,0.18) 0%, transparent 50%), radial-gradient(ellipse 60% 60% at 70% 60%, rgba(158,47,35,0.2) 0%, transparent 50%)",
+                "linear-gradient(180deg, rgba(43,30,22,0.4) 0%, rgba(43,30,22,0.65) 50%, rgba(43,30,22,0.85) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, rgba(0,0,0,0.4) 100%)",
             }}
           />
         </div>

@@ -1,9 +1,9 @@
 import { Reveal } from "@/components/shared/Reveal";
-import { Play } from "lucide-react";
+import { VideoLoop } from "@/components/shared/VideoLoop";
 
 /**
  * Acto 4 — Experience video montage.
- * V1: video poster placeholder. Real Seedance loops integrated in M3.
+ * V2 video: silhouettes + ribs in foreground at evening BBQ event (Seedance 2.0, 8s 1080p).
  */
 export function Experience() {
   return (
@@ -31,38 +31,29 @@ export function Experience() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="mt-12 relative rounded-2xl overflow-hidden bg-charcoal aspect-[16/9] shadow-2xl group">
-            <div
-              aria-hidden
+          <div className="mt-12 relative rounded-2xl overflow-hidden bg-charcoal aspect-[16/9] shadow-2xl">
+            <VideoLoop
+              src="/video/v2-experience-desktop.mp4"
+              srcMobile="/video/v2-experience-mobile.mp4"
+              poster="/video/v2-experience-poster.jpg"
+              ariaLabel="Outdoor evening BBQ event — silhouettes around a table, smoked ribs in foreground"
               className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(ellipse 70% 60% at 50% 60%, rgba(214,162,90,0.32) 0%, rgba(158,47,35,0.18) 30%, rgba(43,30,22,1) 70%)",
-              }}
+              loopFadeMs={650}
             />
             <div
               aria-hidden
-              className="absolute inset-0 opacity-25 mix-blend-screen"
+              className="absolute inset-0 pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle at 30% 70%, rgba(244,230,207,0.4) 0%, transparent 25%), radial-gradient(circle at 70% 30%, rgba(244,230,207,0.3) 0%, transparent 30%)",
+                  "linear-gradient(180deg, transparent 40%, rgba(43,30,22,0.35) 75%, rgba(43,30,22,0.85) 100%)",
               }}
             />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <button
-                type="button"
-                className="size-20 sm:size-24 rounded-full bg-firebrick text-parchment flex items-center justify-center hover:scale-105 transition-transform shadow-2xl group-hover:bg-warmgold group-hover:text-charcoal"
-                aria-label="Play experience video — coming soon"
-              >
-                <Play className="size-8 sm:size-10 ml-1" aria-hidden fill="currentColor" />
-              </button>
-            </div>
             <div className="absolute bottom-6 left-6 right-6 sm:left-10 sm:right-10 text-parchment">
               <p className="font-display text-xl sm:text-2xl md:text-3xl text-balance">
                 Watch the smoke roll. Hear the bark crack.
               </p>
               <p className="text-sm sm:text-base text-parchment/65 mt-2">
-                Cinematic montage — coming soon.
+                A real evening, real plates, real people.
               </p>
             </div>
           </div>
