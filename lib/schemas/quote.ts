@@ -8,7 +8,7 @@ export const quoteSchema = z.object({
   // Step 2
   eventType: z.enum(["corporate", "wedding", "private-party", "other"]),
   eventDate: z.string().min(4, "When is your event?"),
-  guestCount: z.coerce.number().min(10, "We start at ~10 guests.").max(2000),
+  guestCount: z.number().min(10, "We start at ~10 guests.").max(2000),
   // Step 3
   eventLocation: z.string().min(2, "City or venue helps us plan."),
   cateringStyle: z.enum(["drop-off", "buffet", "on-site"]),
