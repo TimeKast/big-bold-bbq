@@ -1,26 +1,189 @@
 @import "tailwindcss";
 
+/* =============================================================================
+   Chef Dee's Big Bold BBQ — Brand Tokens
+   Source of truth: /Users/bob/.claude/plans/users-bob-downloads-chef-dee-s-big-bold-purring-hellman.md
+   Palette and typography defined in client PDF brand guidelines.
+   ============================================================================= */
+
+@theme {
+  /* Colors — palette from brand guidelines */
+  --color-parchment: #f4e6cf;
+  --color-firebrick: #9e2f23;
+  --color-hickory: #3a2a1e;
+  --color-warmgold: #d6a25a;
+  --color-charcoal: #2b1e16;
+
+  /* Semantic aliases */
+  --color-bg: var(--color-parchment);
+  --color-bg-dark: var(--color-charcoal);
+  --color-fg: var(--color-hickory);
+  --color-fg-on-dark: var(--color-parchment);
+  --color-accent: var(--color-firebrick);
+  --color-accent-soft: var(--color-warmgold);
+
+  /* Fonts wired in app/layout.tsx via next/font */
+  --font-display: var(--font-roboto-slab);
+  --font-sans: var(--font-inter);
+
+  /* Easings — see plan §2 motion design system */
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-doc: cubic-bezier(0.7, 0, 0.2, 1);
+  --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Durations */
+  --dur-micro: 160ms;
+  --dur-macro: 600ms;
+  --dur-hero: 1400ms;
+
+  /* Container max */
+  --max-readable: 72ch;
+}
+
+/* =============================================================================
+   Base styles
+   ============================================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Display headings use slab */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Parchment grain texture as subtle bg overlay (4% opacity, applied to specific containers) */
+.bg-parchment-grain {
+  background-color: var(--color-parchment);
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(58, 42, 30, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(58, 42, 30, 0.04) 0%, transparent 50%);
+}
+
+/* =============================================================================
+   Utilities
+   ============================================================================= */
+
+/* Focus ring — high-contrast warm gold on parchment, parchment on charcoal */
+*:focus-visible {
+  outline: 2px solid var(--color-warmgold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Smooth scroll for anchor jumps */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Reveal animation primitives — used by <Reveal /> */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(8px);
+}
+
+.reveal-show {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity var(--dur-macro) var(--ease-standard),
+    transform var(--dur-macro) var(--ease-standard),
+    filter var(--dur-macro) var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Marquee infinite scroll (used in reviews section) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee {
+  animation: marquee 35s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}
+
+/* Award badge shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(214, 162, 90, 0.4) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer {
+    animation: none;
+    background: none;
+  }
+}
+
+/* Selection */
+::selection {
+  background: var(--color-firebrick);
+  color: var(--color-parchment);
+}
+
+/* Sticky bottom bar bottom safe-area */
+.safe-pb {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
 }
