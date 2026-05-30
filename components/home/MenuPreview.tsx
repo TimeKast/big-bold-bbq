@@ -27,20 +27,20 @@ const macroTiles = [
   {
     src: "/video/v4-pulled-pork.mp4",
     poster: "/video/v4-pulled-pork-poster.jpg",
-    alt: "Pulled pork being separated with a fork",
+    alt: "Smoked pulled pork resting with steam rising",
     eyebrow: featuredMenu.pulledPork.tag,
     title: featuredMenu.pulledPork.name,
     short: featuredMenu.pulledPork.short,
-    fade: 650, // directional clip → soften the hard cut
+    fade: 0, // boomerang clip → seamless, no fade pulse
   },
   {
     src: "/video/v5-ribs.mp4",
     poster: "/video/v5-ribs-poster.jpg",
-    alt: "Smoked ribs being placed on a white ceramic plate",
+    alt: "Glazed smoked ribs with backlit smoke drifting",
     eyebrow: featuredMenu.ribs.tag,
     title: featuredMenu.ribs.name,
     short: featuredMenu.ribs.short,
-    fade: 650,
+    fade: 0, // boomerang clip → seamless, no fade pulse
   },
   {
     src: "/video/v6-mac.mp4",
@@ -82,10 +82,11 @@ export function MenuPreview() {
               <VideoLoop
                 src="/video/v3-brisket.mp4"
                 poster="/video/v3-brisket-poster.jpg"
-                ariaLabel="Smoked brisket being sliced"
+                ariaLabel="Smoked brisket resting in drifting smoke"
                 decorative
                 playWhenVisible
                 className="absolute inset-0"
+                loopFadeMs={0}
               />
               <div
                 aria-hidden
