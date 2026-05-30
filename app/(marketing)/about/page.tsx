@@ -99,18 +99,16 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid gap-12 md:gap-16 lg:grid-cols-[360px_1fr] items-start">
             <Reveal>
-              <figure className="relative mx-auto lg:mx-0 w-full max-w-[360px]">
-                <div className="relative rounded-lg overflow-hidden bg-charcoal shadow-2xl ring-1 ring-hickory/10">
-                  <Image
-                    src="/photos/chef-dee.jpg"
-                    alt="Chef Dee in her Big Bold BBQ kitchen, beside fresh-smoked brisket and ribs"
-                    width={478}
-                    height={540}
-                    sizes="360px"
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-                <figcaption className="mt-3 text-center lg:text-left text-xs uppercase tracking-[0.2em] text-hickory/55 font-semibold">
+              <figure className="w-full lg:max-w-[360px] lg:mx-0">
+                <Image
+                  src="/photos/chef-dee.jpg"
+                  alt="Chef Dee in her Big Bold BBQ kitchen, beside fresh-smoked brisket and ribs"
+                  width={478}
+                  height={540}
+                  sizes="(max-width: 1024px) 100vw, 360px"
+                  className="w-full h-auto rounded-xl shadow-lg shadow-hickory/15"
+                />
+                <figcaption className="mt-3 text-xs uppercase tracking-[0.2em] text-hickory/55 font-semibold">
                   Chef Dee · Pitmaster
                 </figcaption>
               </figure>

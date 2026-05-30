@@ -9,7 +9,7 @@
 export const site = {
   name: "Chef Dee's Big Bold BBQ",
   shortName: "Big Bold BBQ",
-  tagline: "Big flavor. Real smoke. Done right.",
+  tagline: "Big flavor. Real smoke.",
   description:
     "Award-winning Southern BBQ catering in Las Vegas with a Creole and Cajun kick. Authentic, soulful catering for corporate events, weddings, and private parties.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bigboldbbq.com",

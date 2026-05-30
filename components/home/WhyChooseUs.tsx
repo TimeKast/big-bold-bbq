@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { Flame, Map, Award, Heart } from "lucide-react";
 
 /**
  * Acto 6 — Why Choose Us.
@@ -7,22 +8,22 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
  */
 const pillars = [
   {
-    n: "01",
+    icon: Flame,
     title: "Smoked low and slow.",
     body: "16-18 hour briskets. No shortcuts. The smoke ring is real.",
   },
   {
-    n: "02",
+    icon: Map,
     title: "Recipes from three states.",
     body: "Texas. Louisiana. Mississippi Delta. Passed down for over 100 years.",
   },
   {
-    n: "03",
+    icon: Award,
     title: "Award-winning pitmaster.",
     body: "First place at the Souper Bowl of Cooking — Super Bowl weekend.",
   },
   {
-    n: "04",
+    icon: Heart,
     title: "You eat what we'd serve our family.",
     body: "Same plates. Same care. Same pride. Every event.",
   },
@@ -50,11 +51,13 @@ export function WhyChooseUs() {
 
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {pillars.map((p, idx) => (
-            <Reveal key={p.n} delay={idx * 100}>
-              <div className="relative pl-6 border-l-2 border-warmgold pt-2">
-                <span className="block font-display text-warmgold text-5xl sm:text-6xl mb-4">
-                  {p.n}
-                </span>
+            <Reveal key={p.title} delay={idx * 100}>
+              <div className="relative pl-6 border-l-2 border-warmgold pt-1">
+                <p.icon
+                  className="size-9 text-warmgold mb-5"
+                  strokeWidth={1.5}
+                  aria-hidden
+                />
                 <h3 className="font-display text-xl md:text-2xl text-parchment mb-3 text-balance">
                   {p.title}
                 </h3>

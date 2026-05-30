@@ -24,21 +24,19 @@ export function MeetChefDee() {
         </Reveal>
 
         <div className="mt-16 grid gap-12 md:grid-cols-2 md:gap-16 items-start">
-          {/* Real Chef Dee portrait — capped + framed (478×540 source) */}
+          {/* Real Chef Dee portrait — clean, no frame (478×540 source) */}
           <Reveal>
-            <figure className="relative mx-auto md:mx-0 w-full max-w-[360px]">
-              <div className="relative rounded-lg overflow-hidden bg-charcoal shadow-2xl ring-1 ring-hickory/10">
-                <Image
-                  src="/photos/chef-dee.jpg"
-                  alt="Chef Dee in her Big Bold BBQ kitchen, beside fresh-smoked brisket and ribs"
-                  width={478}
-                  height={540}
-                  sizes="(max-width: 768px) 360px, 360px"
-                  className="w-full h-auto object-cover"
-                  priority={false}
-                />
-              </div>
-              <figcaption className="mt-3 text-center md:text-left text-xs uppercase tracking-[0.2em] text-hickory/55 font-semibold">
+            <figure className="w-full md:max-w-[440px] md:mx-0">
+              <Image
+                src="/photos/chef-dee.jpg"
+                alt="Chef Dee in her Big Bold BBQ kitchen, beside fresh-smoked brisket and ribs"
+                width={478}
+                height={540}
+                sizes="(max-width: 768px) 100vw, 440px"
+                className="w-full h-auto rounded-xl shadow-lg shadow-hickory/15"
+                priority={false}
+              />
+              <figcaption className="mt-3 text-xs uppercase tracking-[0.2em] text-hickory/55 font-semibold">
                 Chef Dee · Pitmaster
               </figcaption>
             </figure>

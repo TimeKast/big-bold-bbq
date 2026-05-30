@@ -102,7 +102,7 @@ export function Footer() {
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <p className="font-display tracking-wider uppercase text-xs">
-            Big flavor. Real smoke. Done right.
+            Big flavor. Real smoke.
           </p>
         </div>
       </div>
