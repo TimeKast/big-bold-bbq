@@ -43,8 +43,8 @@ Fonts via `next/font` in `app/layout.tsx`: **Roboto Slab** (display) + **Inter**
 
 ## What's NOT done yet (V1 placeholders)
 
-- **Hero video / scroll-scrub** — gradient placeholder. Real Seedance clips via `~/.claude/skills/segmind-video`, encoded GOP=1 per `scroll-scrubbed-video` skill. Wire in M3.
-- **Chef Dee real portrait** — placeholder card. **Bloqueado** PENDING.md P0 #4.
+- **Hero video** — real Seedance clip live (V1). Scroll-scrub treatment still pending (M3).
+- **Chef Dee real portrait** — ✅ real photo live (home + About) from the client deck (`public/photos/chef-dee.jpg`, 478×540). Hi-res original still wanted for larger uses (PENDING.md).
 - **Form backend** — `QuoteFunnelStub` validates with zod and console.logs. M5 wires backend.
 - **GSAP scrollytelling** — components are static reveals. M3 layers GSAP.
 - **Mapbox** — using SVG illustrated map for now (Codex flagged Mapbox overkill for 5 fixed cities).

@@ -2,8 +2,30 @@
 
 > Items waiting on the client (Chef Dee / business owner) before specific milestones can ship. Share this file directly with the client — each item has the question, why it matters, and what blocks if missing.
 
-**Last updated:** 2026-05-08
-**Plan reference:** `/Users/bob/.claude/plans/users-bob-downloads-chef-dee-s-big-bold-purring-hellman.md`
+**Last updated:** 2026-05-30
+**Plan reference:** `/Users/bob/.claude/plans/big-bold-bbq-client-revisions-20260530.md`
+
+---
+
+## ✅ Resolved in client revisions round 1 (deck 05282026, applied 2026-05-30)
+
+- **Phone number** → real **(702) 879-4977** wired everywhere (was placeholder).
+- **Real Chef Dee photo** → from the deck; live on home (Meet Chef Dee) + About. ⚠️ Still want the **original hi-res file** — the deck export is only 478×540, fine for the framed card but too small for any full-bleed/large use.
+- **About copy** → full McCullough family rewrite applied.
+- **Menu page** → built (`/menu`) with the client's full menu copy.
+- **Privacy + Terms** → client's full legal copy applied; pages moved into the main nav shell.
+- **Souper Bowl win** → confirmed via About doc; award framing live.
+- **Nav reorder** → Home > About > Menu > Pricing > Contact > Blog.
+- **Domain** → `bigboldbbq.com` + `www` attached to the Vercel project. **DNS records to add at your registrar** (currently parked on dns-parking.com nameservers):
+  - `A` `@` (root) → `76.76.21.21`
+  - `A` `www` → `76.76.21.21`  (or `CNAME www → cname.vercel-dns.com`)
+  - Vercel auto-issues SSL once these resolve.
+
+### Still open after round 1
+- **Original hi-res Chef Dee photo** (the 478px deck export is a stopgap).
+- **Email provider for chef@bigboldbbq.com** — needed to give you MX/SPF/DKIM. Options: Google Workspace (paid mailbox), Zoho Mail (free tier), or Cloudflare/ImprovMX forwarding (free, forwards to an existing inbox). Tell us which and we'll send the exact records. We cannot create the mailbox for you (it's tied to your provider account).
+- **Footer slogan** still reads "Big flavor. Real smoke. Done right." — the hero dropped "Done right" but the footer keeps the brand tagline. Keep or drop? (Your call.)
+- Google Business reviews, social handles, full photoshoot — unchanged from below.
 
 ---
 
