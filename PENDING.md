@@ -2,7 +2,7 @@
 
 > Items waiting on the client (Chef Dee / business owner) before specific milestones can ship. Share this file directly with the client — each item has the question, why it matters, and what blocks if missing.
 
-**Last updated:** 2026-05-30
+**Last updated:** 2026-05-30 (round 2: hi-res photo, real reviews system, live map)
 **Plan reference:** `/Users/bob/.claude/plans/big-bold-bbq-client-revisions-20260530.md`
 
 ---
@@ -10,7 +10,7 @@
 ## ✅ Resolved in client revisions round 1 (deck 05282026, applied 2026-05-30)
 
 - **Phone number** → real **(702) 879-4977** wired everywhere (was placeholder).
-- **Real Chef Dee photo** → from the deck; live on home (Meet Chef Dee) + About. ⚠️ Still want the **original hi-res file** — the deck export is only 478×540, fine for the framed card but too small for any full-bleed/large use.
+- **Real Chef Dee photo** → live on home (Meet Chef Dee) + About. ✅ **Hi-res upgrade done (2026-05-30):** pulled the original 1122×1402 image embedded in the client's PPTX (replaces the earlier 478px slide export). Optimized to a 186KB progressive JPG. Plenty sharp for the framed card; a studio shoot would still give more flexibility for full-bleed/large crops (see P2 #15).
 - **About copy** → full McCullough family rewrite applied.
 - **Menu page** → built (`/menu`) with the client's full menu copy.
 - **Privacy + Terms** → client's full legal copy applied; pages moved into the main nav shell.
@@ -22,7 +22,6 @@
   - Vercel auto-issues SSL once these resolve.
 
 ### Still open after round 1
-- **Original hi-res Chef Dee photo** (the 478px deck export is a stopgap).
 - **Email provider for chef@bigboldbbq.com** — needed to give you MX/SPF/DKIM. Options: Google Workspace (paid mailbox), Zoho Mail (free tier), or Cloudflare/ImprovMX forwarding (free, forwards to an existing inbox). Tell us which and we'll send the exact records. We cannot create the mailbox for you (it's tied to your provider account).
 - **Footer slogan** still reads "Big flavor. Real smoke. Done right." — the hero dropped "Done right" but the footer keeps the brand tagline. Keep or drop? (Your call.)
 - Google Business reviews, social handles, full photoshoot — unchanged from below.
@@ -81,11 +80,13 @@
 - **Blocks:** Award badge component, Acto 2 stop 3, About authority section, JSON-LD `award` property.
 - **Default if missing:** show the badge with subtler copy (e.g., "Award-winning gumbo" without specific event name) until we have proof to cite.
 
-### 8. Google Business Profile
-- **Question:** Does Chef Dee have an active Google Business Profile? Under what exact name? How many reviews and what's the rating today (real numbers, screenshot welcome)?
-- **Why this is here:** Plan assumed "4.9 ★ — 87 reviews" badge in Acto 7. That was a placeholder, NOT real data. Real numbers go in the badge; if there's no GBP yet, we (a) skip the badge until it exists, and (b) prioritize GBP creation as a 30-day post-launch SEO action.
-- **Blocks:** Acto 7 reviews badge, JSON-LD `AggregateRating` (must be real or omitted).
-- **Decision needed:** show real numbers once GBP exists, or hide rating badge entirely.
+### 8. Google Business Profile + real reviews ⬅️ NOW THE #1 CONTENT GAP
+- **Question:** Does Chef Dee have an active Google Business Profile? What's the **share link** (the `g.page/...` or `maps.app.goo.gl/...` URL)? As real 5-star reviews come in, send us the **reviewer name + the review text + the date** for each.
+- **What's built (2026-05-30):** The fake marquee quotes are GONE. The reviews section now runs on a hand-curation system (`lib/content/reviews.ts`). Today it shows an honest "we're gathering reviews" state — no invented quotes. The moment you:
+  1. paste the **GBP share link** into `lib/site.ts` → a "Review us on Google" button appears, and
+  2. paste **real 5-star reviews** into `lib/content/reviews.ts` → the section flips to premium review cards + a star rating, and Google rich-snippet markup (`AggregateRating` + `Review`) turns on automatically.
+- **Why it matters:** This is the highest-impact remaining content item. Reviews drive both conversion and local SEO. We will never fabricate them.
+- **What we need from you:** (a) the GBP share link, (b) real 5-star reviews as they arrive (text + name + date).
 
 ### 9. Social media handles
 - **Question:** Instagram, TikTok, Facebook, YouTube, Twitter/X — what handles exist?
@@ -103,8 +104,8 @@
 
 ### 11. Real testimonials (with name + city + event type)
 - **Question:** Can we get 6-8 real testimonials with first name, last initial, city, and what event they catered? Can we get 2-3 with permission to use their photo?
-- **Why it matters:** Acto 7 uses 3 prominent testimonials + 12-row marquee. Without real ones, the section either skips or uses placeholders (not preferred).
-- **Default if missing:** skip testimonials section at launch, add post-launch with first 5-10 events.
+- **Status (2026-05-30):** The home reviews section now uses the real-curation system from #8 (`lib/content/reviews.ts`) with an honest empty state — no placeholders. Direct Google reviews are the priority source; standalone testimonials (non-Google) can also be dropped into the same file. Each card supports an optional `eventType` label (e.g. "Wedding · 180 guests").
+- **Default if missing:** the honest "gathering reviews" state stays until real entries exist.
 
 ### 12. Service area photos / venue logistics per city
 - **Question:** Have you actually catered events in Henderson, Summerlin, North Las Vegas, Boulder City? Photos? Venue names you can mention?
@@ -156,7 +157,7 @@
 | Skin family | Cinematic Documentary vs Hearth | **Cinematic Documentary × Hearth (hybrid)** | 2026-05-08 |
 | `/api/quote` runtime | Edge or Node | **Node** (Twilio SDK incompat with Edge) | 2026-05-08 |
 | Video CDN | R2 vs Vercel Blob | **Vercel Blob** for MVP | 2026-05-08 |
-| Map | Mapbox or SVG | **SVG illustrated** for MVP | 2026-05-08 |
+| Map | Mapbox / SVG / Google embed | **Live Google Maps embed** (client chose 2026-05-30, replacing the illustrated SVG) | 2026-05-30 |
 | Blog CMS | Contentlayer or simpler | **`@next/mdx` + `gray-matter`** | 2026-05-08 |
 | Monitoring | Full stack | **Sentry + GA4 + CallRail + Vercel Speed Insights only** (drop BetterStack + Vercel Analytics) | 2026-05-08 |
 

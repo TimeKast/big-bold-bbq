@@ -47,11 +47,12 @@ Fonts via `next/font` in `app/layout.tsx`: **Roboto Slab** (display) + **Inter**
 - **Chef Dee real portrait** — ✅ real photo live (home + About) from the client deck (`public/photos/chef-dee.jpg`, 478×540). Hi-res original still wanted for larger uses (PENDING.md).
 - **Form backend** — `QuoteFunnelStub` validates with zod and console.logs. M5 wires backend.
 - **GSAP scrollytelling** — components are static reveals. M3 layers GSAP.
-- **Mapbox** — using SVG illustrated map for now (Codex flagged Mapbox overkill for 5 fixed cities).
+- **Map** — live **Google Maps embed** (keyless `output=embed`) of the LV metro in `ServiceArea.tsx` (client chose 2026-05-30, replacing the illustrated SVG).
+- **Reviews** — real-curation system. Real 5-star reviews live in `lib/content/reviews.ts` (empty now → honest "gathering reviews" state). "Review us on Google" CTA gated on `site.googleReviews.url`. See PENDING.md P1 #8.
 - **Blog posts** — stub page. M6 adds `@next/mdx` + `gray-matter`.
 - **Analytics** — `gtag('phone_click')` calls present but GA4 not wired. M7.
 - **Award badge JSON-LD** — gated, **Bloqueado** PENDING.md P1 #7.
-- **`AggregateRating` JSON-LD** — gated on `site.googleReviews.show=false`. **Bloqueado** PENDING.md P1 #8.
+- **`AggregateRating` JSON-LD** — auto-derived from `lib/content/reviews.ts`; emitted only when that file has real reviews (no hardcoded numbers).
 
 ## Conventions
 
