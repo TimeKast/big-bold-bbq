@@ -5,9 +5,8 @@ import { Award } from "lucide-react";
 
 /**
  * Acto 2 — Meet Chef Dee.
- * Real portrait (client-provided 2026-05-30). Source is 478×540 (from the
- * client deck export), so the card is capped to ~360px / framed editorially
- * to avoid retina softness. Original hi-res requested (PENDING.md).
+ * Real portrait (hi-res 1122×1402 master from the client deck). Fills the
+ * left grid column so it reads at parity with the story stops beside it.
  */
 export function MeetChefDee() {
   return (
@@ -24,15 +23,15 @@ export function MeetChefDee() {
         </Reveal>
 
         <div className="mt-16 grid gap-12 md:grid-cols-2 md:gap-16 items-start">
-          {/* Real Chef Dee portrait — clean, no frame (478×540 source) */}
+          {/* Real Chef Dee portrait — fills the column to align with the stops */}
           <Reveal>
-            <figure className="w-full md:max-w-[440px] md:mx-0">
+            <figure className="w-full md:sticky md:top-28">
               <Image
                 src="/photos/chef-dee.jpg"
                 alt="Chef Dee in her Big Bold BBQ kitchen, beside fresh-smoked brisket and ribs"
                 width={1122}
                 height={1402}
-                sizes="(max-width: 768px) 100vw, 440px"
+                sizes="(max-width: 768px) 100vw, 600px"
                 className="w-full h-auto rounded-xl shadow-lg shadow-hickory/15"
                 priority={false}
               />
@@ -46,9 +45,6 @@ export function MeetChefDee() {
           <div className="flex flex-col gap-12">
             <Reveal delay={120}>
               <div>
-                <p className="text-firebrick uppercase tracking-[0.18em] text-xs font-bold mb-3">
-                  Stop 01 · Roots
-                </p>
                 <h3 className="font-display text-2xl md:text-3xl mb-4 text-balance">
                   Texas-born. Louisiana-raised. Las Vegas heart.
                 </h3>
@@ -63,9 +59,6 @@ export function MeetChefDee() {
 
             <Reveal delay={220}>
               <div>
-                <p className="text-firebrick uppercase tracking-[0.18em] text-xs font-bold mb-3">
-                  Stop 02 · Purpose
-                </p>
                 <h3 className="font-display text-2xl md:text-3xl mb-4 text-balance">
                   From healing people to feeding them.
                 </h3>
@@ -80,9 +73,6 @@ export function MeetChefDee() {
 
             <Reveal delay={320}>
               <div className="border-l-4 border-warmgold pl-6 py-2 relative">
-                <p className="text-firebrick uppercase tracking-[0.18em] text-xs font-bold mb-3">
-                  Stop 03 · Authority
-                </p>
                 <h3 className="font-display text-2xl md:text-3xl mb-4 text-balance flex items-start gap-3">
                   <Award className="size-7 text-warmgold flex-shrink-0 mt-1" aria-hidden />
                   <span>Souper Bowl of Cooking — First Place.</span>

@@ -91,10 +91,7 @@ export default function ContactPage() {
                   className="absolute -top-24 -right-24 size-72 rounded-full bg-firebrick/20 blur-3xl"
                 />
                 <div className="relative">
-                  <p className="text-warmgold uppercase tracking-[0.2em] text-xs font-bold">
-                    Prefer to write?
-                  </p>
-                  <h2 className="font-display text-3xl md:text-4xl mt-3 text-balance">
+                  <h2 className="font-display text-3xl md:text-4xl text-balance">
                     Use the guided quote form.
                   </h2>
                   <p className="mt-4 text-parchment/85 text-base leading-relaxed">

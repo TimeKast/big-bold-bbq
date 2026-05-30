@@ -18,9 +18,11 @@ export function ServiceArea() {
       className="bg-parchment text-hickory py-24 md:py-32"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid gap-12 md:gap-16 lg:grid-cols-2">
+        {/* Subgrid so both headings share a row and the map + steps start at the
+            same Y on desktop, despite the headings wrapping to different heights. */}
+        <div className="grid gap-x-12 md:gap-x-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-8">
           {/* Service area */}
-          <div>
+          <div className="lg:row-span-2 lg:grid lg:grid-rows-subgrid">
             <Reveal>
               <SectionHeading>
                 Serving Las Vegas
@@ -29,44 +31,46 @@ export function ServiceArea() {
               </SectionHeading>
             </Reveal>
 
-            <Reveal delay={120}>
-              {/* Live Google map of the Las Vegas valley service area */}
-              <figure className="mt-8">
-                <div className="relative aspect-[4/3] rounded-xl border border-hickory/15 overflow-hidden shadow-sm">
-                  <iframe
-                    title="Map of the Las Vegas valley — Big Bold BBQ catering service area covering Las Vegas, North Las Vegas, Summerlin, Henderson, and Boulder City."
-                    src="https://www.google.com/maps?q=Las+Vegas,+Nevada&z=10&output=embed"
-                    className="absolute inset-0 w-full h-full"
-                    style={{ border: 0 }}
-                    loading="lazy"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-                <figcaption className="mt-3 flex items-center gap-2 text-xs text-hickory/60 font-medium uppercase tracking-wider">
-                  <MapPin className="size-3.5 text-firebrick flex-shrink-0" aria-hidden />
-                  We travel roughly 50 miles from the Las Vegas Strip
-                </figcaption>
-              </figure>
-            </Reveal>
+            <div className="mt-8 lg:mt-0">
+              <Reveal delay={120}>
+                {/* Live Google map of the Las Vegas valley service area */}
+                <figure>
+                  <div className="relative aspect-[4/3] rounded-xl border border-hickory/15 overflow-hidden shadow-sm">
+                    <iframe
+                      title="Map of the Las Vegas valley — Big Bold BBQ catering service area covering Las Vegas, North Las Vegas, Summerlin, Henderson, and Boulder City."
+                      src="https://www.google.com/maps?q=Las+Vegas,+Nevada&z=10&output=embed"
+                      className="absolute inset-0 w-full h-full"
+                      style={{ border: 0 }}
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                    />
+                  </div>
+                  <figcaption className="mt-3 flex items-center gap-2 text-xs text-hickory/60 font-medium uppercase tracking-wider">
+                    <MapPin className="size-3.5 text-firebrick flex-shrink-0" aria-hidden />
+                    We travel roughly 50 miles from the Las Vegas Strip
+                  </figcaption>
+                </figure>
+              </Reveal>
 
-            <Reveal delay={220}>
-              <ul className="mt-8 grid grid-cols-2 gap-3">
-                {site.cities.map((city) => (
-                  <li
-                    key={city}
-                    className="flex items-center gap-2 text-hickory/85"
-                  >
-                    <MapPin className="size-4 text-firebrick flex-shrink-0" aria-hidden />
-                    <span>{city}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+              <Reveal delay={220}>
+                <ul className="mt-8 grid grid-cols-2 gap-3">
+                  {site.cities.map((city) => (
+                    <li
+                      key={city}
+                      className="flex items-center gap-2 text-hickory/85"
+                    >
+                      <MapPin className="size-4 text-firebrick flex-shrink-0" aria-hidden />
+                      <span>{city}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            </div>
           </div>
 
           {/* How it works */}
-          <div>
+          <div className="mt-16 lg:mt-0 lg:row-span-2 lg:grid lg:grid-rows-subgrid">
             <Reveal>
               <SectionHeading>
                 Simple. Fast.
@@ -75,7 +79,7 @@ export function ServiceArea() {
               </SectionHeading>
             </Reveal>
 
-            <ol className="mt-8 flex flex-col">
+            <ol className="mt-8 lg:mt-0 flex flex-col">
               {steps.map((s, idx) => (
                 <Reveal key={s.n} delay={idx * 100}>
                   <li
