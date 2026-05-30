@@ -64,7 +64,10 @@ export function VideoLoop({
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  useVideoMobileResume(videoRef);
+  // Tracks viewport intersection so the mobile-resume hook doesn't override a
+  // deliberate off-screen pause from playWhenVisible.
+  const onScreenRef = useRef(true);
+  useVideoMobileResume(videoRef, () => onScreenRef.current);
 
   // Pause when scrolled off-screen (perf for multi-video pages like /menu).
   useEffect(() => {
@@ -74,6 +77,7 @@ export function VideoLoop({
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
+          onScreenRef.current = e.isIntersecting;
           if (e.isIntersecting) video.play().catch(() => {});
           else video.pause();
         }
@@ -81,7 +85,10 @@ export function VideoLoop({
       { threshold: 0.1 }
     );
     io.observe(video);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      onScreenRef.current = true;
+    };
   }, [playWhenVisible, posterOnly]);
 
   useEffect(() => {
@@ -97,6 +104,12 @@ export function VideoLoop({
     let raf = 0;
 
     const tick = () => {
+      // Skip computation while paused/off-screen — currentTime is frozen so the
+      // overlay opacity wouldn't change anyway (saves cycles on multi-loop pages).
+      if (video.paused) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
       const dur = video.duration;
       if (dur > 0) {
         const remaining = dur - video.currentTime;

@@ -16,8 +16,16 @@ import { useEffect, type RefObject } from "react";
  *   + replays from where we were if frozen
  *
  * Source: ~/.claude/skills/html5-video-mobile-resume/SKILL.md
+ *
+ * @param shouldResume optional guard — when it returns false (e.g. the video is
+ *   scrolled off-screen and intentionally paused by `playWhenVisible`), the hook
+ *   will not force playback. Prevents the resume logic from overriding a
+ *   deliberate off-screen pause.
  */
-export function useVideoMobileResume(videoRef: RefObject<HTMLVideoElement | null>) {
+export function useVideoMobileResume(
+  videoRef: RefObject<HTMLVideoElement | null>,
+  shouldResume: () => boolean = () => true,
+) {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -29,7 +37,7 @@ export function useVideoMobileResume(videoRef: RefObject<HTMLVideoElement | null
     let wasHidden = document.hidden;
 
     function tryPlay(attempt = 0) {
-      if (!video || document.hidden || !video.paused) return;
+      if (!video || document.hidden || !video.paused || !shouldResume()) return;
       video.muted = true;
       video.play().catch(() => {
         if (attempt < 3) {
@@ -41,11 +49,11 @@ export function useVideoMobileResume(videoRef: RefObject<HTMLVideoElement | null
     }
 
     function watchdog() {
-      if (!video || document.hidden) return;
+      if (!video || document.hidden || !shouldResume()) return;
       const startCt = video.currentTime;
       timers.push(
         window.setTimeout(() => {
-          if (!video || document.hidden) return;
+          if (!video || document.hidden || !shouldResume()) return;
           const stuck =
             video.paused ||
             (Math.abs(video.currentTime - startCt) < 0.01 && !video.ended);

@@ -41,7 +41,7 @@ export function localBusinessSchema(): SchemaObject {
     })),
     servesCuisine: ["Southern", "Creole", "Cajun", "BBQ"],
     priceRange: "$$$",
-    hasMenu: `${site.url}/menu`,
+    hasMenu: { "@id": `${site.url}/menu#menu` },
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],

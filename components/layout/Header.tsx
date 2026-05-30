@@ -12,7 +12,13 @@ import { CtaButton } from "@/components/shared/CtaButton";
 // Pages whose top section is a DARK hero (charcoal/video). On these, the
 // un-scrolled (transparent) header must use LIGHT nav text so it isn't lost
 // in the hero. Everything else starts on parchment → dark nav text at top.
-const DARK_TOP_PAGES = new Set(["/", "/about", "/menu", "/pricing", "/contact"]);
+// Prefix-matched (besides "/") so future nested routes like /menu/corporate
+// inherit the right theme without touching this list.
+const DARK_TOP_PREFIXES = ["/about", "/menu", "/pricing", "/contact"];
+
+function isDarkTop(pathname: string): boolean {
+  return pathname === "/" || DARK_TOP_PREFIXES.some((p) => pathname.startsWith(p));
+}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,7 +26,7 @@ export function Header() {
   const pathname = usePathname();
 
   // Light nav text when scrolled (solid charcoal header) OR when over a dark hero.
-  const lightText = scrolled || DARK_TOP_PAGES.has(pathname);
+  const lightText = scrolled || isDarkTop(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
