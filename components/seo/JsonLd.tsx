@@ -1,5 +1,6 @@
 import { site } from "@/lib/site";
 import { menu } from "@/lib/content/menu";
+import { reviews, reviewStats } from "@/lib/content/reviews";
 
 type SchemaObject = Record<string, unknown>;
 
@@ -16,6 +17,31 @@ export function JsonLd({ schema }: { schema: SchemaObject | SchemaObject[] }) {
 }
 
 export function localBusinessSchema(): SchemaObject {
+  // Only emit ratings when we have real, curated reviews — never fabricate.
+  const reviewFragment =
+    reviews.length > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: reviewStats.average,
+            reviewCount: reviewStats.count,
+            bestRating: 5,
+            worstRating: 1,
+          },
+          review: reviews.map((r) => ({
+            "@type": "Review",
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: r.rating,
+              bestRating: 5,
+            },
+            author: { "@type": "Person", name: r.author },
+            datePublished: r.date,
+            reviewBody: r.text,
+          })),
+        }
+      : {};
+
   return {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "FoodEstablishment"],
@@ -48,6 +74,7 @@ export function localBusinessSchema(): SchemaObject {
       opens: "08:00",
       closes: "20:00",
     },
+    ...reviewFragment,
   };
 }
 

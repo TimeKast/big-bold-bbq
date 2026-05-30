@@ -65,11 +65,11 @@ export const site = {
     description: "Award-winning gumbo, recognized at the Souper Bowl of Cooking during Super Bowl weekend in Las Vegas.",
   },
 
-  // Google Business Profile rating — TBD (PENDING.md P1 #8). Hidden until real numbers exist.
+  // Google Business Profile. `url` powers the "Review us on Google" CTA and
+  // the "Read all reviews" link — paste the GBP share link when available
+  // (PENDING.md P1 #8). Real reviews themselves live in lib/content/reviews.ts;
+  // the rating/count below are derived from that file, not hardcoded.
   googleReviews: {
-    show: false,
-    rating: 0,
-    count: 0,
     url: "",
   },
 
