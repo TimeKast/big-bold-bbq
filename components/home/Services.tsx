@@ -1,10 +1,12 @@
+import Link from "next/link";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { Briefcase, Heart, Home, Flame } from "lucide-react";
+import { Briefcase, Heart, Home, Flame, ArrowRight } from "lucide-react";
 
 /**
- * Acto 3 — Services (4 types). Vertical card stack, scroll-revealed.
- * V1: simple grid; M3 will swap to "card stack rise-in" with GSAP.
+ * Acto 3 — Services (4 types). Each card links to the Menu page
+ * (client request 2026-05-30: "make these clickable buttons that direct the
+ * visitor to the Menu Page").
  */
 const services = [
   {
@@ -52,7 +54,11 @@ export function Services() {
         <div className="mt-16 grid gap-6 sm:grid-cols-2">
           {services.map((s, idx) => (
             <Reveal key={s.title} delay={idx * 80}>
-              <article className="group relative overflow-hidden rounded-lg border border-parchment/10 bg-hickory/40 backdrop-blur-sm p-8 hover:border-warmgold/50 transition-all duration-300 h-full">
+              <Link
+                href="/menu"
+                aria-label={`${s.title} — view the full menu`}
+                className="group relative block overflow-hidden rounded-lg border border-parchment/10 bg-hickory/40 backdrop-blur-sm p-8 hover:border-warmgold/50 transition-all duration-300 h-full focus-visible:outline-2 focus-visible:outline-warmgold focus-visible:outline-offset-2"
+              >
                 <div className="absolute -top-12 -right-12 size-48 rounded-full bg-firebrick/10 blur-2xl group-hover:bg-firebrick/20 transition-all duration-500" />
 
                 <div className="relative">
@@ -63,8 +69,12 @@ export function Services() {
                   <p className="text-parchment/80 text-base leading-relaxed">
                     {s.body}
                   </p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-wider text-warmgold opacity-80 group-hover:opacity-100 group-hover:gap-2.5 transition-all">
+                    View menu
+                    <ArrowRight className="size-4" aria-hidden />
+                  </span>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>

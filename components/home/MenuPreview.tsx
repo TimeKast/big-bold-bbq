@@ -31,6 +31,7 @@ const macroTiles = [
     eyebrow: featuredMenu.pulledPork.tag,
     title: featuredMenu.pulledPork.name,
     short: featuredMenu.pulledPork.short,
+    fade: 650, // directional clip → soften the hard cut
   },
   {
     src: "/video/v5-ribs.mp4",
@@ -39,6 +40,7 @@ const macroTiles = [
     eyebrow: featuredMenu.ribs.tag,
     title: featuredMenu.ribs.name,
     short: featuredMenu.ribs.short,
+    fade: 650,
   },
   {
     src: "/video/v6-mac.mp4",
@@ -47,6 +49,7 @@ const macroTiles = [
     eyebrow: featuredMenu.mac.tag,
     title: featuredMenu.mac.name,
     short: featuredMenu.mac.short,
+    fade: 0, // boomerang clip → already seamless, no fade pulse
   },
 ] as const;
 
@@ -144,7 +147,7 @@ export function MenuPreview() {
                   decorative
                   playWhenVisible
                   className="absolute inset-0"
-                  loopFadeMs={650}
+                  loopFadeMs={tile.fade}
                 />
                 <div
                   aria-hidden

@@ -159,7 +159,7 @@ export default function MenuPage() {
                       ariaLabel="Oak fire and embers in a steel firepit"
                       className="absolute inset-0"
                       playWhenVisible
-                      loopFadeMs={650}
+                      loopFadeMs={0}
                     />
                     <div
                       aria-hidden

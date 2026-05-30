@@ -13,13 +13,14 @@ export function FinalCTA() {
       aria-labelledby="final-cta-title"
       className="relative bg-charcoal text-parchment py-28 md:py-40 overflow-hidden"
     >
-      {/* V7 ambient fire backdrop */}
+      {/* V7 ambient fire backdrop — boomerang clip, already seamless (no loop fade) */}
       <VideoLoop
         src="/video/v7-fire-desktop.mp4"
         srcMobile="/video/v7-fire-mobile.mp4"
         poster="/video/v7-fire-poster.jpg"
         ariaLabel="Oak fire and embers in a steel firepit"
         className="absolute inset-0"
+        loopFadeMs={0}
       />
 
       {/* Firebrick multiply overlay + vignette */}
