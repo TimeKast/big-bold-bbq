@@ -99,7 +99,9 @@ export function Footer() {
 
         <div className="border-t border-parchment/15 mt-16 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-sm text-parchment/55">
           <p>
-            © {new Date().getFullYear()} Big Bold BBQ. All rights reserved.
+            © {new Date().getFullYear()}{" "}
+            <span className="text-firebrick font-semibold">Big Bold</span> BBQ. All
+            rights reserved.
           </p>
           <p className="font-display tracking-wider uppercase text-xs">
             Big flavor. <span className="text-firebrick">Real smoke.</span>
