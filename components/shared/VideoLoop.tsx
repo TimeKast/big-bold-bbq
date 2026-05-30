@@ -22,6 +22,17 @@ type Props = {
    */
   loopFadeMs?: number;
   loopFadeColor?: string;
+  /**
+   * Decorative inside an interactive parent (e.g. a <Link> tile). When true, the
+   * <video> is aria-hidden with no label — the parent provides the accessible name.
+   */
+  decorative?: boolean;
+  /**
+   * Pause playback while off-screen (IntersectionObserver). Saves decode/battery
+   * when several loops live on one page (e.g. the menu). Default false (hero/CTA
+   * should always play).
+   */
+  playWhenVisible?: boolean;
 };
 
 /**
@@ -48,10 +59,30 @@ export function VideoLoop({
   posterOnly = false,
   loopFadeMs = 500,
   loopFadeColor = "var(--color-charcoal)",
+  decorative = false,
+  playWhenVisible = false,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   useVideoMobileResume(videoRef);
+
+  // Pause when scrolled off-screen (perf for multi-video pages like /menu).
+  useEffect(() => {
+    if (!playWhenVisible || posterOnly) return;
+    const video = videoRef.current;
+    if (!video) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(video);
+    return () => io.disconnect();
+  }, [playWhenVisible, posterOnly]);
 
   useEffect(() => {
     if (posterOnly || loopFadeMs <= 0) return;
@@ -97,8 +128,9 @@ export function VideoLoop({
           muted
           loop
           playsInline
-          preload="metadata"
-          aria-label={ariaLabel}
+          preload={playWhenVisible ? "none" : "metadata"}
+          aria-label={decorative ? undefined : ariaLabel}
+          aria-hidden={decorative || undefined}
           className={cn(
             "absolute inset-0 w-full h-full object-cover transition-opacity duration-700",
             visible ? "opacity-100" : "opacity-0",

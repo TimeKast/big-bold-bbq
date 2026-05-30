@@ -51,14 +51,19 @@ export function Hero() {
 
           <h1
             id="hero-title"
-            className="font-display font-black uppercase leading-[0.92] tracking-[-0.04em] text-balance"
+            className="font-display font-black uppercase leading-[0.95] tracking-[-0.04em] text-balance"
             style={{
-              fontSize: "clamp(2.75rem, 9vw, 7rem)",
+              fontSize: "clamp(3.25rem, 11vw, 8.5rem)",
+              textShadow: "0 2px 30px rgba(0,0,0,0.55)",
             }}
           >
             <span className="block text-parchment">Big flavor.</span>
-            <span className="block text-parchment">Real smoke.</span>
-            <span className="block text-firebrick">Done right.</span>
+            <span
+              className="block text-firebrick"
+              style={{ textShadow: "0 2px 22px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.5)" }}
+            >
+              Real smoke.
+            </span>
           </h1>
 
           <p className="mt-8 text-lg sm:text-xl md:text-2xl text-parchment/85 max-w-2xl text-pretty leading-relaxed">

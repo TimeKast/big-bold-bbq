@@ -204,7 +204,7 @@ function StepBasics() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <Field label="Full name" name="fullName" placeholder="Jordan Rivers" />
-      <Field label="Phone" name="phone" type="tel" placeholder="(702) 555-0100" />
+      <Field label="Phone" name="phone" type="tel" placeholder="(702) 555-1234" />
       <div className="md:col-span-2">
         <Field label="Email" name="email" type="email" placeholder="you@example.com" />
       </div>

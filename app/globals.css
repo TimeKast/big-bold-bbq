@@ -187,3 +187,12 @@ html {
 .safe-pb {
   padding-bottom: max(env(safe-area-inset-bottom), 0px);
 }
+
+/* Hide scrollbar (menu category jump-nav) while keeping scroll */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

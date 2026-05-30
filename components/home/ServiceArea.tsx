@@ -6,8 +6,8 @@ import { site } from "@/lib/site";
 const steps = [
   { n: "01", title: "Call or request a quote", body: "Tell us your event basics. We respond same-day." },
   { n: "02", title: "We customize your menu", body: "Built around guest count, preferences, and service style." },
-  { n: "03", title: "Confirm your date", body: "Secure with a 50% deposit. Final balance due 24h before." },
-  { n: "04", title: "You enjoy unforgettable BBQ", body: "We handle the rest. Smoke. Serve. Clean up. Done right." },
+  { n: "03", title: "Confirm your date", body: "Secure with a 50% deposit. Final balance due 24 hrs before your event." },
+  { n: "04", title: "You enjoy unforgettable BBQ", body: "Smoke. Deliver. Satisfaction." },
 ] as const;
 
 export function ServiceArea() {

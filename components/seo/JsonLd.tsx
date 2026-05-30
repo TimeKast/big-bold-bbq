@@ -1,13 +1,16 @@
 import { site } from "@/lib/site";
+import { menu } from "@/lib/content/menu";
 
 type SchemaObject = Record<string, unknown>;
 
 export function JsonLd({ schema }: { schema: SchemaObject | SchemaObject[] }) {
+  // Escape `<` to `<` so a stray "<" in content can't break out of the
+  // <script> tag (Next.js / OWASP JSON-in-HTML guidance).
+  const json = JSON.stringify(schema).replace(/</g, "\\u003c");
   return (
     <script
       type="application/ld+json"
-      // Safe: schema is built server-side from typed data, not user input.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: json }}
     />
   );
 }
@@ -38,12 +41,48 @@ export function localBusinessSchema(): SchemaObject {
     })),
     servesCuisine: ["Southern", "Creole", "Cajun", "BBQ"],
     priceRange: "$$$",
+    hasMenu: `${site.url}/menu`,
     openingHoursSpecification: {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
       opens: "08:00",
       closes: "20:00",
     },
+  };
+}
+
+/** Person schema for Chef Dee — injected on /about. */
+export function personSchema(): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${site.url}/about#chef-dee`,
+    name: "Chef Dee",
+    jobTitle: "Pitmaster & Chef",
+    image: `${site.url}/photos/chef-dee.jpg`,
+    worksFor: { "@id": `${site.url}/#organization` },
+    award: site.award.show ? site.award.name : undefined,
+    knowsAbout: ["Southern BBQ", "Creole cuisine", "Cajun cuisine", "Smoked meats", "Gumbo"],
+  };
+}
+
+/** Menu schema (no prices — catering is custom-quoted). Linked from LocalBusiness.hasMenu. */
+export function menuSchema(): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Menu",
+    "@id": `${site.url}/menu#menu`,
+    name: `${site.name} Catering Menu`,
+    url: `${site.url}/menu`,
+    hasMenuSection: menu.map((cat) => ({
+      "@type": "MenuSection",
+      name: cat.title,
+      hasMenuItem: cat.items.map((item) => ({
+        "@type": "MenuItem",
+        name: item.name,
+        description: item.description,
+      })),
+    })),
   };
 }
 

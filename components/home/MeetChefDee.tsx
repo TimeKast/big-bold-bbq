@@ -1,12 +1,13 @@
+import Image from "next/image";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Award } from "lucide-react";
 
 /**
  * Acto 2 — Meet Chef Dee.
- * V1: simplified side-by-side (no GSAP pinning yet — that's M3).
- * Three "stops" of copy on the right, portrait placeholder on the left.
- * Real portrait blocked on PENDING.md P0 #4.
+ * Real portrait (client-provided 2026-05-30). Source is 478×540 (from the
+ * client deck export), so the card is capped to ~360px / framed editorially
+ * to avoid retina softness. Original hi-res requested (PENDING.md).
  */
 export function MeetChefDee() {
   return (
@@ -23,27 +24,24 @@ export function MeetChefDee() {
         </Reveal>
 
         <div className="mt-16 grid gap-12 md:grid-cols-2 md:gap-16 items-start">
-          {/* Portrait placeholder — TBD real photo, see PENDING.md P0 #4 */}
+          {/* Real Chef Dee portrait — capped + framed (478×540 source) */}
           <Reveal>
-            <div className="aspect-[4/5] rounded-lg overflow-hidden bg-charcoal relative">
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at center, rgba(214,162,90,0.25) 0%, transparent 60%), linear-gradient(180deg, rgba(43,30,22,0.95) 0%, rgba(58,42,30,0.95) 100%)",
-                }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center px-6">
-                  <p className="text-warmgold/85 text-sm uppercase tracking-[0.2em] font-semibold">
-                    Portrait of Chef Dee
-                  </p>
-                  <p className="text-parchment/55 text-xs mt-2 max-w-xs">
-                    Real photo coming once shoot is scheduled. (See PENDING.md)
-                  </p>
-                </div>
+            <figure className="relative mx-auto md:mx-0 w-full max-w-[360px]">
+              <div className="relative rounded-lg overflow-hidden bg-charcoal shadow-2xl ring-1 ring-hickory/10">
+                <Image
+                  src="/photos/chef-dee.jpg"
+                  alt="Chef Dee in her Big Bold BBQ kitchen, beside fresh-smoked brisket and ribs"
+                  width={478}
+                  height={540}
+                  sizes="(max-width: 768px) 360px, 360px"
+                  className="w-full h-auto object-cover"
+                  priority={false}
+                />
               </div>
-            </div>
+              <figcaption className="mt-3 text-center md:text-left text-xs uppercase tracking-[0.2em] text-hickory/55 font-semibold">
+                Chef Dee · Pitmaster
+              </figcaption>
+            </figure>
           </Reveal>
 
           {/* Copy stops */}
@@ -54,7 +52,7 @@ export function MeetChefDee() {
                   Stop 01 · Roots
                 </p>
                 <h3 className="font-display text-2xl md:text-3xl mb-4 text-balance">
-                  Texas-born. Louisiana-raised. Las Vegas hearth.
+                  Texas-born. Louisiana-raised. Las Vegas heart.
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-hickory/90">
                   Chef Dee&apos;s family roots stretch across Texas, Louisiana, and the

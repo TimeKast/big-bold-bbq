@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { site } from "@/lib/site";
@@ -8,9 +9,18 @@ import { cn } from "@/lib/utils";
 import { PhoneLink } from "@/components/shared/PhoneLink";
 import { CtaButton } from "@/components/shared/CtaButton";
 
+// Pages whose top section is a DARK hero (charcoal/video). On these, the
+// un-scrolled (transparent) header must use LIGHT nav text so it isn't lost
+// in the hero. Everything else starts on parchment → dark nav text at top.
+const DARK_TOP_PAGES = new Set(["/", "/about", "/menu", "/pricing", "/contact"]);
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Light nav text when scrolled (solid charcoal header) OR when over a dark hero.
+  const lightText = scrolled || DARK_TOP_PAGES.has(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -41,12 +51,12 @@ export function Header() {
             href="/"
             className={cn(
               "font-display text-xl sm:text-2xl font-black uppercase tracking-tight transition-colors",
-              scrolled ? "text-parchment" : "text-hickory"
+              lightText ? "text-parchment" : "text-hickory"
             )}
             aria-label={site.name}
           >
             <span className="text-firebrick">Big Bold</span>
-            <span className={scrolled ? "text-parchment" : "text-hickory"}> BBQ</span>
+            <span className={lightText ? "text-parchment" : "text-hickory"}> BBQ</span>
           </Link>
 
           {/* Desktop nav */}
@@ -60,7 +70,7 @@ export function Header() {
                 href={item.href}
                 className={cn(
                   "font-medium text-sm uppercase tracking-wider transition-colors hover:text-warmgold",
-                  scrolled ? "text-parchment" : "text-hickory"
+                  lightText ? "text-parchment" : "text-hickory"
                 )}
               >
                 {item.label}
@@ -88,7 +98,7 @@ export function Header() {
             type="button"
             className={cn(
               "lg:hidden p-2 rounded-md transition-colors",
-              scrolled
+              lightText
                 ? "text-parchment hover:bg-parchment/10"
                 : "text-hickory hover:bg-hickory/10"
             )}

@@ -83,7 +83,7 @@ export default function PricingPage() {
           <Reveal>
             <SectionHeading
               eyebrow="What Impacts Pricing"
-              lead="A few honest variables shape every quote."
+              lead="A few variables that help shape every quote:"
             >
               What determines your
               <br />
@@ -119,7 +119,7 @@ export default function PricingPage() {
             <SectionHeading
               eyebrow="What You Get"
               tone="light"
-              lead="When you choose Big Bold BBQ, you are not just paying for food. You are investing in:"
+              lead="When you choose Big Bold BBQ, you are not just paying for food."
             >
               Real flavor. Real care.
               <br />

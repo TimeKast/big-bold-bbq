@@ -15,11 +15,11 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bigboldbbq.com",
   locale: "en-US",
 
-  // TBD — real phone number from client (PENDING.md P0 #1)
+  // Real phone (client-confirmed 2026-05-30)
   phone: {
-    display: "(702) 555-0100",
-    e164: "+17025550100",
-    href: "tel:+17025550100",
+    display: "(702) 879-4977",
+    e164: "+17028794977",
+    href: "tel:+17028794977",
   },
 
   // TBD — real lead notification email
@@ -73,9 +73,11 @@ export const site = {
     url: "",
   },
 
+  // Order per client (2026-05-30): Home > About > Menu > Pricing > Contact > Blog
   nav: [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
+    { href: "/menu", label: "Menu" },
     { href: "/pricing", label: "Pricing" },
     { href: "/contact", label: "Contact" },
     { href: "/blog", label: "Blog" },
