@@ -5,7 +5,7 @@ import { CtaButton } from "@/components/shared/CtaButton";
 
 export function Footer() {
   return (
-    <footer className="bg-charcoal text-parchment pt-20 pb-12 mt-20">
+    <footer className="bg-charcoal text-parchment pt-20 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
@@ -99,10 +99,10 @@ export function Footer() {
 
         <div className="border-t border-parchment/15 mt-16 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-sm text-parchment/55">
           <p>
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+            © {new Date().getFullYear()} Big Bold BBQ. All rights reserved.
           </p>
           <p className="font-display tracking-wider uppercase text-xs">
-            Big flavor. Real smoke.
+            Big flavor. <span className="text-firebrick">Real smoke.</span>
           </p>
         </div>
       </div>

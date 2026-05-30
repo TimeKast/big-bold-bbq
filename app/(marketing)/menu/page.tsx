@@ -168,7 +168,7 @@ export default function MenuPage() {
                     />
                     <div className="absolute bottom-6 left-6 right-6 sm:left-10 text-parchment">
                       <p className="font-display text-2xl sm:text-3xl md:text-4xl text-balance">
-                        Real smoke. No shortcuts.
+                        <span className="text-firebrick">Real smoke.</span> No shortcuts.
                       </p>
                     </div>
                   </div>
