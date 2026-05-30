@@ -101,8 +101,8 @@ export default function AboutPage() {
                 <Image
                   src="/photos/chef-dee.jpg"
                   alt="Chef Dee in her Big Bold BBQ kitchen, beside fresh-smoked brisket and ribs"
-                  width={403}
-                  height={504}
+                  width={1122}
+                  height={1402}
                   sizes="(max-width: 1024px) 100vw, 400px"
                   className="w-full h-auto rounded-xl shadow-lg shadow-hickory/15"
                 />
