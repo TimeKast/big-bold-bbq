@@ -5,7 +5,7 @@ import { CtaButton } from "@/components/shared/CtaButton";
 
 export function Footer() {
   return (
-    <footer className="bg-charcoal text-parchment pt-20 pb-12">
+    <footer className="relative bg-[#1c130c] text-parchment pt-20 pb-12 border-t border-warmgold/15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
