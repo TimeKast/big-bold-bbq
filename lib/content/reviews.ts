@@ -5,9 +5,14 @@
  * collects them from the Google Business Profile, paste each one below. When
  * this array is non-empty:
  *   - the homepage Reviews section renders the cards + an aggregate rating
- *   - JSON-LD emits AggregateRating + Review for Google rich snippets
+ *   - JSON-LD emits valid AggregateRating + Review structured data
  * While it's empty, the section shows an honest "gathering reviews" state —
  * never invented quotes.
+ *
+ * Note: Google generally does NOT render star rich-results for a business's
+ * own self-hosted reviews (only third-party/aggregator pages get stars). The
+ * markup is still valid, truthful structured data that helps Google understand
+ * the entity — we just don't bank on stars showing in search.
  *
  * To add a review: copy the reviewer's first name + last initial, the review
  * text verbatim, and the date from Google. Keep `rating: 5`. `eventType` is

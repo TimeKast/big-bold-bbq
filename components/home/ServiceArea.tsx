@@ -39,7 +39,7 @@ export function ServiceArea() {
                     className="absolute inset-0 w-full h-full"
                     style={{ border: 0 }}
                     loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
+                    referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                   />
                 </div>
