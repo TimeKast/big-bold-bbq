@@ -30,7 +30,7 @@ export function PhoneLink({
     }
   };
 
-  const base = "inline-flex items-center gap-2 transition-colors duration-150";
+  const base = "inline-flex items-center justify-center gap-2 transition-colors duration-150";
   const variants = {
     primary:
       "bg-firebrick text-parchment px-6 py-3 rounded-md font-semibold hover:bg-charcoal hover:shadow-lg",

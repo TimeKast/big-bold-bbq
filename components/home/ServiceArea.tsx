@@ -1,7 +1,6 @@
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
-import { MapPin } from "lucide-react";
-import { site } from "@/lib/site";
+import { ServiceAreaMap } from "@/components/home/ServiceAreaMap";
 
 const steps = [
   { n: "01", title: "Call or request a quote", body: "Tell us your event basics. We respond same-day." },
@@ -32,40 +31,7 @@ export function ServiceArea() {
             </Reveal>
 
             <div className="mt-8 lg:mt-0">
-              <Reveal delay={120}>
-                {/* Live Google map of the Las Vegas valley service area */}
-                <figure>
-                  <div className="relative aspect-[4/3] rounded-xl border border-hickory/15 overflow-hidden shadow-sm">
-                    <iframe
-                      title="Map of the Las Vegas valley — Big Bold BBQ catering service area covering Las Vegas, North Las Vegas, Summerlin, Henderson, and Boulder City."
-                      src="https://www.google.com/maps?q=Las+Vegas,+Nevada&z=10&output=embed"
-                      className="absolute inset-0 w-full h-full"
-                      style={{ border: 0 }}
-                      loading="lazy"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                    />
-                  </div>
-                  <figcaption className="mt-3 flex items-center gap-2 text-xs text-hickory/60 font-medium uppercase tracking-wider">
-                    <MapPin className="size-3.5 text-firebrick flex-shrink-0" aria-hidden />
-                    We travel roughly 50 miles from the Las Vegas Strip
-                  </figcaption>
-                </figure>
-              </Reveal>
-
-              <Reveal delay={220}>
-                <ul className="mt-8 grid grid-cols-2 gap-3">
-                  {site.cities.map((city) => (
-                    <li
-                      key={city}
-                      className="flex items-center gap-2 text-hickory/85"
-                    >
-                      <MapPin className="size-4 text-firebrick flex-shrink-0" aria-hidden />
-                      <span>{city}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
+              <ServiceAreaMap />
             </div>
           </div>
 

@@ -196,3 +196,21 @@ html {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Leaflet service-area map — strip default divIcon box, warm the pin shadow */
+.bbq-pin {
+  background: transparent;
+  border: 0;
+}
+.bbq-pin svg {
+  display: block;
+  filter: drop-shadow(0 2px 3px rgba(43, 30, 22, 0.35));
+}
+.leaflet-container {
+  font: inherit;
+  background: var(--color-parchment-grain, #efe2c8);
+}
+.leaflet-popup-content {
+  font: inherit;
+  color: var(--color-hickory, #3a2a1e);
+}

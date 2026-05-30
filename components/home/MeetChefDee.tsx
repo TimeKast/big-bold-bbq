@@ -46,13 +46,13 @@ export function MeetChefDee() {
             <Reveal delay={120}>
               <div>
                 <h3 className="font-display text-2xl md:text-3xl mb-4 text-balance">
-                  Texas-born. Louisiana-raised. Las Vegas heart.
+                  Arizona born. Southern soul. Las Vegas heart.
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-hickory/90">
-                  Chef Dee&apos;s family roots stretch across Texas, Louisiana, and the
-                  Mississippi Delta. Her recipes carry over 100 years of Southern,
-                  Creole, and Cajun tradition — flavors that are not recreated. They
-                  are inherited.
+                  Born and raised in Arizona, Chef Dee comes from a family rooted in
+                  Texas and Louisiana — by way of the Mississippi. Her recipes carry
+                  over 100 years of Southern, Creole, and Cajun tradition — flavors
+                  that are not recreated. They are inherited.
                 </p>
               </div>
             </Reveal>
