@@ -45,11 +45,20 @@ export const metadata: Metadata = {
     title: site.name,
     description: site.description,
     siteName: site.name,
+    images: [
+      {
+        url: "/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — Las Vegas BBQ catering`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
     description: site.description,
+    images: ["/og-default.jpg"],
   },
   robots: {
     index: true,
@@ -61,8 +70,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "/favicon.svg",
+  appleWebApp: {
+    capable: true,
+    title: site.shortName,
+    statusBarStyle: "black-translucent",
   },
 };
 

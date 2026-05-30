@@ -121,7 +121,7 @@ export function organizationSchema(): SchemaObject {
     "@id": `${site.url}/#organization`,
     name: site.name,
     url: site.url,
-    logo: `${site.url}/logo.svg`,
+    logo: `${site.url}/icon-512.png`,
     sameAs: sameAs.length ? sameAs : undefined,
   };
 }
