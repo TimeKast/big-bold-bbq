@@ -30,8 +30,8 @@ export function MeetChefDee() {
               <Image
                 src="/photos/chef-dee.jpg"
                 alt="Chef Dee in her Big Bold BBQ kitchen, beside fresh-smoked brisket and ribs"
-                width={478}
-                height={540}
+                width={403}
+                height={504}
                 sizes="(max-width: 768px) 100vw, 440px"
                 className="w-full h-auto rounded-xl shadow-lg shadow-hickory/15"
                 priority={false}
