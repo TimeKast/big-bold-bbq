@@ -12,7 +12,11 @@ export const site = {
   tagline: "Big flavor. Real smoke.",
   description:
     "Award-winning Southern BBQ catering in Las Vegas with a Creole and Cajun kick. Authentic, soulful catering for corporate events, weddings, and private parties.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bigboldbbq.com",
+  // TEMPORARY: bigboldbbq.com is still parked at the registrar (DNS not pointed
+  // to Vercel — see PENDING.md), so the canonical/OG base uses the live Vercel
+  // URL meanwhile, otherwise share previews reference a dead domain. Revert this
+  // to "https://bigboldbbq.com" the moment DNS is connected.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://big-bold-bbq.vercel.app",
   locale: "en-US",
 
   // Real phone (client-confirmed 2026-05-30)

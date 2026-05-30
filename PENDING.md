@@ -16,10 +16,11 @@
 - **Privacy + Terms** → client's full legal copy applied; pages moved into the main nav shell.
 - **Souper Bowl win** → confirmed via About doc; award framing live.
 - **Nav reorder** → Home > About > Menu > Pricing > Contact > Blog.
-- **Domain** → `bigboldbbq.com` + `www` attached to the Vercel project. **DNS records to add at your registrar** (currently parked on dns-parking.com nameservers):
+- **Domain** → `bigboldbbq.com` + `www` attached to the Vercel project, **but still parked at the registrar** (Hostinger / dns-parking.com nameservers) — it does NOT yet point to Vercel, so the real domain shows a parked page. **DNS records to add at your registrar:**
   - `A` `@` (root) → `76.76.21.21`
-  - `A` `www` → `76.76.21.21`  (or `CNAME www → cname.vercel-dns.com`)
-  - Vercel auto-issues SSL once these resolve.
+  - `CNAME` `www` → `cname.vercel-dns.com`
+  - Remove the parking/dns-parking nameserver records. Vercel auto-issues SSL once these resolve.
+  - ⚠️ **TEMP override active (2026-05-30):** because the domain is parked, `lib/site.ts` `site.url` is pointed at `https://big-bold-bbq.vercel.app` so share previews / OG image / canonical resolve to the live deployment. **Revert that one line back to `https://bigboldbbq.com` the moment DNS is connected.**
 
 ### Still open after round 1
 - **Email provider for chef@bigboldbbq.com** — needed to give you MX/SPF/DKIM. Options: Google Workspace (paid mailbox), Zoho Mail (free tier), or Cloudflare/ImprovMX forwarding (free, forwards to an existing inbox). Tell us which and we'll send the exact records. We cannot create the mailbox for you (it's tied to your provider account).
