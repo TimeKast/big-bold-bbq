@@ -31,7 +31,7 @@ const macroTiles = [
     eyebrow: featuredMenu.pulledPork.tag,
     title: featuredMenu.pulledPork.name,
     short: featuredMenu.pulledPork.short,
-    fade: 0, // plain ambient loop (mostly smoke) — no fade pulse
+    fade: 0, // seamless crossfade loop baked into the file — no JS fade
   },
   {
     src: "/video/v5-ribs.mp4",
@@ -40,7 +40,7 @@ const macroTiles = [
     eyebrow: featuredMenu.ribs.tag,
     title: featuredMenu.ribs.name,
     short: featuredMenu.ribs.short,
-    fade: 0, // plain ambient loop (mostly smoke) — no fade pulse
+    fade: 0, // seamless crossfade loop baked into the file — no JS fade
   },
   {
     src: "/video/v6-mac.mp4",
@@ -49,7 +49,7 @@ const macroTiles = [
     eyebrow: featuredMenu.mac.tag,
     title: featuredMenu.mac.name,
     short: featuredMenu.mac.short,
-    fade: 0, // boomerang clip → already seamless, no fade pulse
+    fade: 0, // seamless crossfade loop baked into the file — no JS fade
   },
 ] as const;
 

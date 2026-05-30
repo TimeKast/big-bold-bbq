@@ -35,7 +35,7 @@ export function Experience() {
               poster="/video/v2-experience-poster.jpg"
               ariaLabel="Outdoor evening BBQ event — silhouettes around a table, smoked ribs in foreground"
               className="absolute inset-0"
-              loopFadeMs={650}
+              loopFadeMs={0}
             />
             <div
               aria-hidden

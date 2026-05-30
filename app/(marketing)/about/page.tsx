@@ -55,7 +55,7 @@ export default function AboutPage() {
           poster="/video/v8-hearth-poster.jpg"
           ariaLabel="Wood-fired hearth at golden hour, embers and warm bokeh"
           className="absolute inset-0"
-          loopFadeMs={650}
+          loopFadeMs={0}
         />
         <div aria-hidden className="absolute inset-0 pointer-events-none">
           <div

@@ -21,6 +21,7 @@ export function Hero() {
         poster="/video/v1-hero-poster.jpg"
         ariaLabel="Smoked brisket resting on a hickory pit, smoke drifting in the firebox glow"
         className="absolute inset-0"
+        loopFadeMs={0}
       />
 
       {/* Tinted vignette for legibility of headline */}
