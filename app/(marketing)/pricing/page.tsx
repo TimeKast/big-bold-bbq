@@ -51,9 +51,6 @@ export default function PricingPage() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
           <Reveal>
-            <p className="text-warmgold uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-6">
-              Pricing
-            </p>
             <h1
               className="font-display font-black uppercase leading-[0.95] tracking-[-0.03em] text-balance max-w-5xl"
               style={{ fontSize: "clamp(2.5rem, 9vw, 6.5rem)" }}
@@ -82,7 +79,6 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <Reveal>
             <SectionHeading
-              eyebrow="What Impacts Pricing"
               lead="A few variables that help shape every quote:"
             >
               What determines your
@@ -117,7 +113,6 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <Reveal>
             <SectionHeading
-              eyebrow="What You Get"
               tone="light"
               lead="When you choose Big Bold BBQ, you are not just paying for food."
             >
@@ -147,7 +142,6 @@ export default function PricingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <Reveal>
             <SectionHeading
-              eyebrow="Booking Process"
               lead="Five steps. No fluff. No delays."
             >
               Simple and transparent
@@ -178,7 +172,6 @@ export default function PricingPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <Reveal>
             <SectionHeading
-              eyebrow="Let's go"
               tone="light"
               align="center"
             >

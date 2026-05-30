@@ -39,7 +39,6 @@ export function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="Why Choose Us"
             tone="light"
             lead="Authentic Creole and Cajun influence rarely found in Las Vegas. Custom menus, fast response, real BBQ — backyard to ballroom."
           >

@@ -41,7 +41,6 @@ export function Services() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="Services"
             tone="light"
             lead="Every event is different. Every menu is custom. Every plate carries the same heart."
           >

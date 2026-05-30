@@ -29,7 +29,6 @@ export function Reviews() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="Reviews"
             align="center"
             lead="What clients are saying. Real words, real plates, real events."
           >

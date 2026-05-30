@@ -63,7 +63,6 @@ export function MenuPreview() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="The Menu"
             lead="Pulled from a hundred years of family kitchens. Cooked the way it should be cooked."
           >
             Authentic Southern BBQ with

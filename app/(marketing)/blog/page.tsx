@@ -16,7 +16,6 @@ export default function BlogPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>
           <SectionHeading
-            eyebrow="The Blog"
             lead="Real BBQ knowledge from a real pitmaster. Catering tips, Southern cooking traditions, event planning, and the bold flavors that make every event unforgettable."
           >
             BBQ catering tips,

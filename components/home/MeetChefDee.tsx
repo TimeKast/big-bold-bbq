@@ -18,7 +18,7 @@ export function MeetChefDee() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>
-          <SectionHeading eyebrow="Meet Chef Dee" lead="A rare kind of pitmaster.">
+          <SectionHeading lead="A rare kind of pitmaster.">
             The story behind every plate.
           </SectionHeading>
         </Reveal>

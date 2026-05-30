@@ -14,9 +14,6 @@ export default function RequestQuotePage() {
     <section className="bg-parchment text-hickory pt-32 pb-24 md:pt-40 md:pb-32 min-h-screen">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <Reveal>
-          <p className="text-firebrick uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-4">
-            Request a Quote
-          </p>
           <h1
             className="font-display font-black uppercase leading-[0.95] tracking-[-0.03em] text-balance"
             style={{ fontSize: "clamp(2.5rem, 8vw, 5.5rem)" }}

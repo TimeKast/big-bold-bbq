@@ -29,9 +29,6 @@ export default function ContactPage() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
           <Reveal>
-            <p className="text-warmgold uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-6">
-              Contact
-            </p>
             <h1
               className="font-display font-black uppercase leading-[0.95] tracking-[-0.03em] text-balance max-w-4xl"
               style={{ fontSize: "clamp(2.5rem, 9vw, 6rem)" }}
@@ -54,7 +51,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid gap-12 md:gap-16 lg:grid-cols-[1.2fr_1fr]">
             <Reveal>
-              <SectionHeading eyebrow="Direct Line" lead="A few minutes by phone usually beats a long form. We pick up.">
+              <SectionHeading lead="A few minutes by phone usually beats a long form. We pick up.">
                 Call us for a fast quote.
               </SectionHeading>
 
@@ -126,7 +123,7 @@ export default function ContactPage() {
       <section className="bg-parchment-grain text-hickory py-24 md:py-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <Reveal>
-            <SectionHeading eyebrow="What Happens Next" align="center">
+            <SectionHeading align="center">
               Fast, simple, and transparent.
             </SectionHeading>
           </Reveal>

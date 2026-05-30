@@ -19,9 +19,6 @@ export default function PrivacyPage() {
   return (
     <section className="bg-parchment text-hickory pt-32 pb-24 md:pt-40 md:pb-32 min-h-screen">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <p className="text-firebrick uppercase tracking-[0.3em] text-xs font-bold mb-4">
-          {site.name}
-        </p>
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl tracking-[-0.02em] text-balance">
           Privacy Policy
         </h1>

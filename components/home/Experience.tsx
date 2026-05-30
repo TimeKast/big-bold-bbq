@@ -14,9 +14,6 @@ export function Experience() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>
-          <p className="text-firebrick uppercase tracking-[0.2em] text-sm font-bold mb-4">
-            Experience the Flavor
-          </p>
           <h2
             id="experience-title"
             className="font-display text-5xl sm:text-6xl md:text-7xl text-balance max-w-4xl"

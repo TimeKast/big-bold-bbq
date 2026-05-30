@@ -40,9 +40,6 @@ export default function MenuPage() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
           <Reveal>
-            <p className="text-warmgold uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-6">
-              {menuIntro.eyebrow}
-            </p>
             <h1
               className="font-display font-black uppercase leading-[0.98] tracking-[-0.03em] text-balance max-w-5xl"
               style={{ fontSize: "clamp(2.25rem, 7vw, 5.5rem)" }}
@@ -186,9 +183,6 @@ export default function MenuPage() {
       <section className="bg-charcoal text-parchment py-24 md:py-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <Reveal>
-            <p className="text-warmgold uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-6">
-              Let&apos;s Eat
-            </p>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-balance">
               {menuClosing.title}
             </h2>

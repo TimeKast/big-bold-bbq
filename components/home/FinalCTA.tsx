@@ -43,9 +43,6 @@ export function FinalCTA() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 text-center">
-        <p className="text-warmgold uppercase tracking-[0.3em] text-xs sm:text-sm font-bold mb-6">
-          Ready When You Are
-        </p>
         <h2
           id="final-cta-title"
           className="font-display font-black uppercase leading-[0.95] tracking-[-0.03em] text-balance"

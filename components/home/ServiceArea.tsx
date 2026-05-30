@@ -22,7 +22,7 @@ export function ServiceArea() {
           {/* Service area */}
           <div>
             <Reveal>
-              <SectionHeading eyebrow="Service Area">
+              <SectionHeading>
                 Serving Las Vegas
                 <br />
                 and surrounding areas.
@@ -141,7 +141,7 @@ export function ServiceArea() {
           {/* How it works */}
           <div>
             <Reveal>
-              <SectionHeading eyebrow="How It Works">
+              <SectionHeading>
                 Simple. Fast.
                 <br />
                 Stress-free catering.

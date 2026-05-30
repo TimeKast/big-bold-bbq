@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 
 type Props = {
-  eyebrow?: string;
   children: React.ReactNode;
   lead?: string;
   align?: "left" | "center";
@@ -10,7 +9,6 @@ type Props = {
 };
 
 export function SectionHeading({
-  eyebrow,
   children,
   lead,
   align = "left",
@@ -25,16 +23,6 @@ export function SectionHeading({
         className
       )}
     >
-      {eyebrow && (
-        <p
-          className={cn(
-            "text-sm uppercase tracking-[0.2em] font-semibold mb-4",
-            tone === "dark" ? "text-firebrick" : "text-warmgold"
-          )}
-        >
-          {eyebrow}
-        </p>
-      )}
       <h2
         className={cn(
           "font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-balance",
