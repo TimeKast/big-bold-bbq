@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
-import { PhoneLink } from "@/components/shared/PhoneLink";
 import { site } from "@/lib/site";
 import { Mail, MapPin } from "lucide-react";
 
@@ -55,7 +54,7 @@ export default function ContactPage() {
                 Call us for a fast quote.
               </SectionHeading>
 
-              <div className="mt-10 flex flex-col gap-4 max-w-md">
+              <div className="mt-10 max-w-md">
                 <a
                   href={site.phone.href}
                   className="font-display text-4xl sm:text-5xl text-firebrick hover:text-warmgold transition-colors"
@@ -63,7 +62,6 @@ export default function ContactPage() {
                 >
                   {site.phone.display}
                 </a>
-                <PhoneLink source="cta-band" variant="primary" />
               </div>
 
               <ul className="mt-12 flex flex-col gap-5 text-base text-hickory/85 max-w-md">
