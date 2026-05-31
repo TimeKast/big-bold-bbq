@@ -63,7 +63,7 @@ export function MeetChefDee() {
                   From healing people to feeding them.
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-hickory/90">
-                  Before becoming a full-time chef, Chef Dee served as a registered
+                  Before becoming a full-time chef, Chef Dee served as a licensed
                   nurse, dedicating her life to caring for others. Today she
                   continues that mission through food — bringing people together
                   with bold, authentic flavor.
