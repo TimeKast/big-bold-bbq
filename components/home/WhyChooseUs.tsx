@@ -20,7 +20,7 @@ const pillars = [
   {
     icon: Award,
     title: "Award-winning pitmaster.",
-    body: "First place at the Souper Bowl of Cooking — Super Bowl weekend.",
+    body: "First place at the Souper Bowl of Caring — Super Bowl weekend.",
   },
   {
     icon: Heart,

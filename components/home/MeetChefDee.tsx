@@ -75,11 +75,11 @@ export function MeetChefDee() {
               <div className="border-l-4 border-warmgold pl-6 py-2 relative">
                 <h3 className="font-display text-2xl md:text-3xl mb-4 text-balance flex items-start gap-3">
                   <Award className="size-7 text-warmgold flex-shrink-0 mt-1" aria-hidden />
-                  <span>Souper Bowl of Cooking — First Place.</span>
+                  <span>Souper Bowl of Caring — First Place.</span>
                 </h3>
                 <p className="text-base md:text-lg leading-relaxed text-hickory/90">
                   Her award-winning gumbo took first place at the Souper Bowl of
-                  Cooking during Super Bowl weekend in Las Vegas. Athletes,
+                  Caring during Super Bowl weekend in Las Vegas. Athletes,
                   musicians, and culinary experts all agreed: this is the real thing.
                 </p>
               </div>

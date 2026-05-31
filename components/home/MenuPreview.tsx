@@ -13,7 +13,7 @@ import { ArrowRight } from "lucide-react";
 
 // Supporting text-list highlights — real menu names spanning categories.
 const listItems = [
-  { name: "Award-Winning Gumbo", note: "Collard green, seafood, or chicken & sausage. First place at the Souper Bowl of Cooking." },
+  { name: "Award-Winning Gumbo", note: "Collard green, seafood, or chicken & sausage. First place at the Souper Bowl of Caring." },
   { name: "Jambalaya", note: "Bold Creole rice with chicken, andouille, and the holy trinity. Shrimp or crawfish optional." },
   { name: "Faydean's Creole Dirty Rice", note: "Seasoned pork and chicken, Creole spice, deep Southern flavor." },
   { name: "Jean's Cajun Dirty Cabbage", note: "Cabbage and collards with smoked andouille and Cajun spice." },

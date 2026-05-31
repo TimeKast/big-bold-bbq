@@ -64,9 +64,9 @@ export const site = {
   // Award — TBD verification (PENDING.md P1 #7). Toggle showAward to false until confirmed.
   award: {
     show: true,
-    name: "Souper Bowl of Cooking",
+    name: "Souper Bowl of Caring",
     placement: "First Place",
-    description: "Award-winning gumbo, recognized at the Souper Bowl of Cooking during Super Bowl weekend in Las Vegas.",
+    description: "Award-winning gumbo, recognized at the Souper Bowl of Caring during Super Bowl weekend in Las Vegas.",
   },
 
   // Google Business Profile. `url` powers the "Review us on Google" CTA and

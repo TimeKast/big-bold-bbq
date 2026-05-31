@@ -74,9 +74,9 @@
 - **Blocks:** "As featured in" press section in Acto 2/About. Without verified press, that section stays hidden (no fake placeholders).
 - **Default if missing:** remove press section entirely until real mentions exist.
 
-### 7. Souper Bowl of Cooking win — verify
-- **Question:** What year did Chef Dee win the Souper Bowl of Cooking? What was the exact event name, venue, and organizer? Do you have a photo of the trophy/award, a press release, or a link to the event's official results?
-- **Why this is here:** This is a centerpiece trust signal in the plan (award badge appears in 4 locations + JSON-LD). I could not find any public record of a "Souper Bowl of Cooking" event in Las Vegas around Super Bowl LVIII (Feb 2024) where Chef Dee placed first. This may be: (a) a local/charity event without web footprint (legitimate), (b) a different event name we have wrong, or (c) something to re-verify with the client.
+### 7. Souper Bowl of Caring win — verify
+- **Question:** What year did Chef Dee win the Souper Bowl of Caring? What was the exact event name, venue, and organizer? Do you have a photo of the trophy/award, a press release, or a link to the event's official results?
+- **Why this is here:** This is a centerpiece trust signal in the plan (award badge appears in 4 locations + JSON-LD). I could not find any public record of a "Souper Bowl of Caring" event in Las Vegas around Super Bowl LVIII (Feb 2024) where Chef Dee placed first. This may be: (a) a local/charity event without web footprint (legitimate), (b) a different event name we have wrong, or (c) something to re-verify with the client.
 - **Risk:** publishing an unverifiable award claim in JSON-LD `award` field is reputational risk if Google or a competitor checks.
 - **Blocks:** Award badge component, Acto 2 stop 3, About authority section, JSON-LD `award` property.
 - **Default if missing:** show the badge with subtler copy (e.g., "Award-winning gumbo" without specific event name) until we have proof to cite.

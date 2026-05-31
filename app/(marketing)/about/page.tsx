@@ -219,7 +219,7 @@ export default function AboutPage() {
             <div className="mt-8 space-y-6 text-lg sm:text-xl text-hickory/85 leading-relaxed">
               <p>
                 Before becoming a full-time chef and pitmaster, Chef Dee dedicated
-                her life to helping others as a registered nurse. Her purpose has
+                her life to helping others as a licensed nurse. Her purpose has
                 always remained the same: <strong>to care for people.</strong> Today,
                 she continues that mission through food.
               </p>
@@ -254,7 +254,7 @@ export default function AboutPage() {
               <p>
                 Chef Dee&apos;s passion and authenticity have earned national
                 recognition. During Super Bowl weekend in Las Vegas, she won the
-                Souper Bowl of Cooking, an NFL charitable culinary competition
+                Souper Bowl of Caring, an NFL charitable culinary competition
                 featuring athletes, musicians, culinary professionals, and celebrity
                 guests.
               </p>
