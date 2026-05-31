@@ -10,13 +10,14 @@ import { ChevronLeft, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * Multi-step quote funnel — V1 stub.
- * Validates per-step with zod, persists nothing yet, on submit logs to console.
- * M5 wires this to /api/quote (Node runtime) → Supabase + Resend + Turnstile.
+ * Multi-step quote funnel.
+ * Validates per-step with zod, then posts submissions to /api/quote.
  */
 export function QuoteFunnelStub() {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const methods = useForm<QuoteInput>({
     resolver: zodResolver(quoteSchema),
@@ -40,21 +41,55 @@ export function QuoteFunnelStub() {
   const stepFields = STEPS[step].fields;
 
   async function next() {
+    if (submitting) return;
+
     const ok = await methods.trigger([...stepFields]);
     if (!ok) return;
     if (step < STEPS.length - 1) setStep(step + 1);
-    else methods.handleSubmit(onSubmit)();
+    else await methods.handleSubmit(onSubmit)();
   }
 
   function back() {
+    if (submitting) return;
     setStep(Math.max(0, step - 1));
   }
 
   async function onSubmit(data: QuoteInput) {
-    if (data.website) return; // honeypot
-    // V1 stub: console.log only. M5 hooks /api/quote.
-    console.log("[quote] submitted", data);
-    setSubmitted(true);
+    if (data.website) {
+      setSubmitted(true);
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = (await response.json().catch(() => null)) as
+        | { message?: string }
+        | null;
+
+      if (!response.ok) {
+        throw new Error(
+          result?.message || "We could not send your request. Please call us directly."
+        );
+      }
+
+      methods.reset();
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "We could not send your request. Please call us directly."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -111,12 +146,21 @@ export function QuoteFunnelStub() {
           {step === 3 && <StepMenu />}
         </div>
 
+        {submitError && (
+          <p
+            className="rounded-md border border-firebrick/30 bg-firebrick/10 px-4 py-3 text-sm text-firebrick"
+            role="alert"
+          >
+            {submitError}
+          </p>
+        )}
+
         {/* Nav */}
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <button
             type="button"
             onClick={back}
-            disabled={step === 0}
+            disabled={step === 0 || submitting}
             className="inline-flex items-center gap-1 text-hickory/75 hover:text-firebrick disabled:opacity-30 disabled:pointer-events-none transition-colors"
           >
             <ChevronLeft className="size-4" aria-hidden />
@@ -130,8 +174,9 @@ export function QuoteFunnelStub() {
               size="lg"
               onClick={next}
               type="button"
+              disabled={submitting}
             >
-              {step === STEPS.length - 1 ? "Get My Quote" : "Continue"}
+              {submitting ? "Sending..." : step === STEPS.length - 1 ? "Get My Quote" : "Continue"}
             </CtaButton>
           </div>
         </div>

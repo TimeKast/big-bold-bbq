@@ -35,6 +35,7 @@ type Props = VariantProps<typeof button> & {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   ariaLabel?: string;
+  disabled?: boolean;
 };
 
 export function CtaButton({
@@ -47,6 +48,7 @@ export function CtaButton({
   type,
   onClick,
   ariaLabel,
+  disabled,
 }: Props) {
   const cls = cn(button({ variant, size }), className);
 
@@ -77,6 +79,7 @@ export function CtaButton({
       onClick={onClick}
       className={cls}
       aria-label={ariaLabel}
+      disabled={disabled}
     >
       {children}
     </button>
