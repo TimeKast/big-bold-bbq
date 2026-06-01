@@ -190,7 +190,6 @@ export function VideoLoop({
       {!posterOnly && (
         <video
           ref={videoRef}
-          poster={poster}
           autoPlay
           muted
           loop
