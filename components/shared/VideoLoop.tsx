@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useVideoMobileResume } from "@/lib/hooks/useVideoMobileResume";
 import { cn } from "@/lib/utils";
 
@@ -64,6 +64,7 @@ export function VideoLoop({
 }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   // Tracks viewport intersection so the mobile-resume hook doesn't override a
   // deliberate off-screen pause from playWhenVisible.
   const onScreenRef = useRef(true);
@@ -88,18 +89,26 @@ export function VideoLoop({
         video.play().catch(() => {});
       }
     };
+    const markPlaying = () => setIsPlaying(true);
+    const markStopped = () => setIsPlaying(false);
+
+    video.addEventListener("playing", markPlaying);
+    video.addEventListener("pause", markStopped);
+    video.addEventListener("emptied", markStopped);
 
     if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
       play();
-      return;
+    } else {
+      video.addEventListener("loadeddata", play, { once: true });
+      video.addEventListener("canplay", play, { once: true });
     }
-
-    video.addEventListener("loadeddata", play, { once: true });
-    video.addEventListener("canplay", play, { once: true });
 
     return () => {
       video.removeEventListener("loadeddata", play);
       video.removeEventListener("canplay", play);
+      video.removeEventListener("playing", markPlaying);
+      video.removeEventListener("pause", markStopped);
+      video.removeEventListener("emptied", markStopped);
     };
   }, [posterOnly, src, srcMobile]);
 
@@ -168,6 +177,17 @@ export function VideoLoop({
   return (
     <div className={cn("relative overflow-hidden", className)}>
       {!posterOnly && (
+        <div
+          aria-hidden
+          className={cn(
+            "absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-700",
+            visible ? "opacity-100" : "opacity-0"
+          )}
+          style={{ backgroundImage: `url(${poster})` }}
+        />
+      )}
+
+      {!posterOnly && (
         <video
           ref={videoRef}
           poster={poster}
@@ -183,7 +203,7 @@ export function VideoLoop({
           aria-hidden={decorative || undefined}
           className={cn(
             "absolute inset-0 w-full h-full object-cover transition-opacity duration-700",
-            visible ? "opacity-100" : "opacity-0",
+            visible && isPlaying ? "opacity-100" : "opacity-0",
             videoClassName
           )}
         >
