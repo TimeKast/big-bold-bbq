@@ -61,10 +61,15 @@ export function Services() {
                 <div className="absolute -top-12 -right-12 size-48 rounded-full bg-firebrick/10 blur-2xl group-hover:bg-firebrick/20 transition-all duration-500" />
 
                 <div className="relative">
-                  <s.icon className="size-10 text-warmgold mb-6" aria-hidden />
-                  <h3 className="font-display text-2xl md:text-3xl text-parchment mb-3">
-                    {s.title}
-                  </h3>
+                  <div className="mb-4 flex items-start gap-3 sm:gap-4">
+                    <s.icon
+                      className="mt-1 size-8 flex-shrink-0 text-warmgold sm:size-10"
+                      aria-hidden
+                    />
+                    <h3 className="font-display text-2xl leading-tight text-parchment md:text-3xl">
+                      {s.title}
+                    </h3>
+                  </div>
                   <p className="text-parchment/80 text-base leading-relaxed">
                     {s.body}
                   </p>
