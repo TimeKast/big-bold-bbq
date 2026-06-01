@@ -28,6 +28,28 @@ function getEmailAddress(value: string | undefined, fallback: string) {
   return (match?.[1] ?? value).trim();
 }
 
+function getPostgresConnectionString() {
+  const connectionString = process.env.DATABASE_URL;
+
+  if (!connectionString) {
+    return connectionString;
+  }
+
+  try {
+    const url = new URL(connectionString);
+    const sslMode = url.searchParams.get("sslmode");
+
+    if (sslMode === "prefer" || sslMode === "require" || sslMode === "verify-ca") {
+      url.searchParams.set("sslmode", "verify-full");
+      return url.toString();
+    }
+  } catch {
+    return connectionString;
+  }
+
+  return connectionString;
+}
+
 const resendApiKey = process.env.RESEND_API_KEY;
 
 export default buildConfig({
@@ -47,7 +69,7 @@ export default buildConfig({
   ],
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URL,
+      connectionString: getPostgresConnectionString(),
     },
   }),
   editor: lexicalEditor({}),
