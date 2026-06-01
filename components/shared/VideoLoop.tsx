@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useVideoMobileResume } from "@/lib/hooks/useVideoMobileResume";
 import { cn } from "@/lib/utils";
 
@@ -67,7 +67,41 @@ export function VideoLoop({
   // Tracks viewport intersection so the mobile-resume hook doesn't override a
   // deliberate off-screen pause from playWhenVisible.
   const onScreenRef = useRef(true);
-  useVideoMobileResume(videoRef, () => onScreenRef.current);
+  const shouldResume = useCallback(() => onScreenRef.current, []);
+  useVideoMobileResume(videoRef, shouldResume);
+
+  useEffect(() => {
+    if (posterOnly) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Re-assert the autoplay contract in the DOM. Some mobile browsers and
+    // React hydration paths are stricter about properties than JSX attributes.
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.controls = false;
+
+    const play = () => {
+      if (onScreenRef.current) {
+        video.play().catch(() => {});
+      }
+    };
+
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      play();
+      return;
+    }
+
+    video.addEventListener("loadeddata", play, { once: true });
+    video.addEventListener("canplay", play, { once: true });
+
+    return () => {
+      video.removeEventListener("loadeddata", play);
+      video.removeEventListener("canplay", play);
+    };
+  }, [posterOnly, src, srcMobile]);
 
   // Pause when scrolled off-screen (perf for multi-video pages like /menu).
   useEffect(() => {
@@ -141,7 +175,10 @@ export function VideoLoop({
           muted
           loop
           playsInline
-          preload={playWhenVisible ? "none" : "metadata"}
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          preload="auto"
           aria-label={decorative ? undefined : ariaLabel}
           aria-hidden={decorative || undefined}
           className={cn(
