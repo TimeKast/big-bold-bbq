@@ -1,6 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { sqliteAdapter } from "@payloadcms/db-sqlite";
+import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -19,9 +19,9 @@ export default buildConfig({
     user: Users.slug,
   },
   collections: [Users, Media, Authors, Categories, Tags, BlogPosts],
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URL ?? "file:./payload.db",
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL,
     },
   }),
   editor: lexicalEditor({}),
