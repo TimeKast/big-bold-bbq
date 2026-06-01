@@ -1,6 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { postgresAdapter } from "@payloadcms/db-postgres";
+import { resendAdapter } from "@payloadcms/email-resend";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { buildConfig } from "payload";
@@ -17,6 +18,17 @@ import { Users } from "./collections/Users.ts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+function getEmailAddress(value: string | undefined, fallback: string) {
+  if (!value) {
+    return fallback;
+  }
+
+  const match = value.match(/<([^<>]+)>/);
+  return (match?.[1] ?? value).trim();
+}
+
+const resendApiKey = process.env.RESEND_API_KEY;
 
 export default buildConfig({
   admin: {
@@ -39,6 +51,13 @@ export default buildConfig({
     },
   }),
   editor: lexicalEditor({}),
+  email: resendApiKey
+    ? resendAdapter({
+        apiKey: resendApiKey,
+        defaultFromAddress: getEmailAddress(process.env.QUOTE_FROM_EMAIL, "chef@bigboldbbq.com"),
+        defaultFromName: "Chef Dee's Big Bold BBQ",
+      })
+    : undefined,
   graphQL: {
     disable: true,
   },
