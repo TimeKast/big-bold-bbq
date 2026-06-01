@@ -176,19 +176,14 @@ export function MenuPreview() {
             <Reveal key={item.name} delay={idx * 50}>
               <Link
                 href="/menu"
-                className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-6 bg-parchment p-6 sm:p-8 hover:bg-parchment-grain transition-colors group focus-visible:outline-2 focus-visible:outline-warmgold focus-visible:-outline-offset-2"
+                className="block bg-parchment p-6 sm:p-8 hover:bg-parchment-grain transition-colors group focus-visible:outline-2 focus-visible:outline-warmgold focus-visible:-outline-offset-2"
               >
-                <div className="flex-1">
-                  <h3 className="font-display text-xl sm:text-2xl md:text-3xl text-hickory group-hover:text-firebrick transition-colors">
-                    {item.name}
-                  </h3>
-                  <p className="text-hickory/70 text-sm sm:text-base mt-1 max-w-xl">
-                    {item.note}
-                  </p>
-                </div>
-                <span className="text-warmgold font-display text-sm sm:text-base whitespace-nowrap font-bold tracking-widest">
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
+                <h3 className="font-display text-xl sm:text-2xl md:text-3xl text-hickory group-hover:text-firebrick transition-colors">
+                  {item.name}
+                </h3>
+                <p className="text-hickory/70 text-sm sm:text-base mt-1 max-w-xl">
+                  {item.note}
+                </p>
               </Link>
             </Reveal>
           ))}
