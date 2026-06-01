@@ -6,6 +6,14 @@ import { fileURLToPath } from "node:url";
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: "*.public.blob.vercel-storage.com",
+        protocol: "https",
+      },
+    ],
+  },
   // Pin Turbopack root to this project so it ignores the parent monorepo lockfile.
   turbopack: {
     root: path.resolve(dirname),

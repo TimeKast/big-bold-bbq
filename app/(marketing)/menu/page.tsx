@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Reveal } from "@/components/shared/Reveal";
 import { CtaButton } from "@/components/shared/CtaButton";
 import { PhoneLink } from "@/components/shared/PhoneLink";
 import { VideoLoop } from "@/components/shared/VideoLoop";
 import { JsonLd, breadcrumbSchema, menuSchema } from "@/components/seo/JsonLd";
-import { menu, menuIntro, menuClosing } from "@/lib/content/menu";
+import { menuIntro, menuClosing } from "@/lib/content/menu";
+import { getMenuPageData } from "@/lib/menu";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -14,7 +16,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/menu" },
 };
 
-export default function MenuPage() {
+export const dynamic = "force-dynamic";
+
+export default async function MenuPage() {
+  const menuData = await getMenuPageData();
+  const menu = menuData.categories;
+
   return (
     <>
       <JsonLd
@@ -23,7 +30,7 @@ export default function MenuPage() {
             { name: "Home", url: site.url },
             { name: "Menu", url: `${site.url}/menu` },
           ]),
-          menuSchema(),
+          menuSchema(menu),
         ]}
       />
 
@@ -94,12 +101,19 @@ export default function MenuPage() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6">
               <Reveal>
                 <div className="flex items-end justify-between gap-4 border-b-2 border-warmgold/40 pb-4 mb-10">
-                  <h2
-                    id={`${cat.id}-title`}
-                    className="font-display text-3xl sm:text-4xl md:text-5xl text-hickory text-balance"
-                  >
-                    {cat.title}
-                  </h2>
+                  <div>
+                    <h2
+                      id={`${cat.id}-title`}
+                      className="font-display text-3xl sm:text-4xl md:text-5xl text-hickory text-balance"
+                    >
+                      {cat.title}
+                    </h2>
+                    {cat.blurb ? (
+                      <p className="mt-3 max-w-2xl text-base text-hickory/70">
+                        {cat.blurb}
+                      </p>
+                    ) : null}
+                  </div>
                   <span className="font-display text-warmgold text-lg sm:text-2xl font-bold tabular-nums hidden sm:block">
                     {String(catIdx + 1).padStart(2, "0")}
                   </span>
@@ -109,35 +123,52 @@ export default function MenuPage() {
               <div className="grid gap-x-12 gap-y-8 md:grid-cols-2">
                 {cat.items.map((item, idx) => (
                   <Reveal key={item.name} delay={idx * 40}>
-                    <article className="border-l-2 border-hickory/10 pl-5 hover:border-firebrick transition-colors">
-                      <div className="flex items-baseline gap-3 flex-wrap">
-                        <h3 className="font-display text-xl sm:text-2xl text-hickory">
-                          {item.name}
-                        </h3>
-                        {item.tag && (
-                          <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-firebrick bg-firebrick/10 px-2 py-0.5 rounded-full">
-                            {item.tag}
-                          </span>
-                        )}
-                        {item.note && (
-                          <span className="text-xs italic text-hickory/55">{item.note}</span>
+                    <article
+                      className={`grid gap-4 border-l-2 border-hickory/10 pl-5 transition-colors hover:border-firebrick ${
+                        item.image ? "sm:grid-cols-[132px_1fr]" : ""
+                      }`}
+                    >
+                      {item.image ? (
+                        <div className="relative aspect-square overflow-hidden rounded-lg bg-hickory/10 sm:mt-1">
+                          <Image
+                            src={item.image.url}
+                            alt={item.image.alt}
+                            fill
+                            className="object-cover"
+                            sizes="(min-width: 768px) 132px, 35vw"
+                          />
+                        </div>
+                      ) : null}
+                      <div>
+                        <div className="flex items-baseline gap-3 flex-wrap">
+                          <h3 className="font-display text-xl sm:text-2xl text-hickory">
+                            {item.name}
+                          </h3>
+                          {item.tag && (
+                            <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-firebrick bg-firebrick/10 px-2 py-0.5 rounded-full">
+                              {item.tag}
+                            </span>
+                          )}
+                          {item.note && (
+                            <span className="text-xs italic text-hickory/55">{item.note}</span>
+                          )}
+                        </div>
+                        <p className="mt-2 text-base text-hickory/80 leading-relaxed max-w-prose">
+                          {item.description}
+                        </p>
+                        {item.variants.length > 0 && (
+                          <ul className="mt-4 flex flex-col gap-3 pl-4 border-l border-warmgold/40">
+                            {item.variants.map((v) => (
+                              <li key={v.name}>
+                                <p className="font-display text-base text-hickory">{v.name}</p>
+                                <p className="text-sm text-hickory/70 leading-relaxed">
+                                  {v.description}
+                                </p>
+                              </li>
+                            ))}
+                          </ul>
                         )}
                       </div>
-                      <p className="mt-2 text-base text-hickory/80 leading-relaxed max-w-prose">
-                        {item.description}
-                      </p>
-                      {item.variants && (
-                        <ul className="mt-4 flex flex-col gap-3 pl-4 border-l border-warmgold/40">
-                          {item.variants.map((v) => (
-                            <li key={v.name}>
-                              <p className="font-display text-base text-hickory">{v.name}</p>
-                              <p className="text-sm text-hickory/70 leading-relaxed">
-                                {v.description}
-                              </p>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
                     </article>
                   </Reveal>
                 ))}

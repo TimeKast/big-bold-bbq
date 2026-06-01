@@ -3,25 +3,31 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
 import { Star } from "lucide-react";
 import { site } from "@/lib/site";
-import { reviews, reviewStats } from "@/lib/content/reviews";
+import type { GoogleReviewsData } from "@/lib/reviews";
 
 /**
- * Acto 7 — Reviews. Real, hand-curated 5-star Google reviews from
- * lib/content/reviews.ts. While that file is empty, an honest "gathering
- * reviews" state shows instead — no invented quotes.
+ * Acto 7 - Reviews. Real Google reviews are curated in Payload. While the CMS
+ * has no featured reviews, an honest "gathering reviews" state shows instead.
  */
 
-function Stars({ className = "" }: { className?: string }) {
+function Stars({ className = "", rating = 5 }: { className?: string; rating?: number }) {
+  const filledStars = Math.round(Math.min(5, Math.max(1, rating)));
+
   return (
     <div className={`flex gap-0.5 ${className}`} aria-hidden>
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="size-4 text-warmgold" fill="currentColor" />
+        <Star
+          key={i}
+          className="size-4 text-warmgold"
+          fill={i < filledStars ? "currentColor" : "none"}
+        />
       ))}
     </div>
   );
 }
 
-export function Reviews() {
+export function Reviews({ data }: { data: GoogleReviewsData }) {
+  const { reviews, reviewStats } = data;
   const hasReviews = reviews.length > 0;
   const googleUrl = site.googleReviews.url;
 
@@ -64,7 +70,7 @@ export function Reviews() {
               {reviews.map((r, idx) => (
                 <Reveal key={`${r.author}-${idx}`} delay={idx * 60}>
                   <figure className="h-full flex flex-col rounded-2xl bg-parchment-grain border border-hickory/12 p-7 shadow-sm">
-                    <Stars />
+                    <Stars rating={r.rating} />
                     <blockquote className="mt-4 flex-1 text-hickory/85 text-lg leading-relaxed text-pretty">
                       &ldquo;{r.text}&rdquo;
                     </blockquote>

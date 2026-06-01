@@ -4,7 +4,7 @@ import { isAuthenticated } from "./access.ts";
 export const Media: CollectionConfig = {
   slug: "media",
   admin: {
-    group: "Blog",
+    group: "Content",
     useAsTitle: "alt",
   },
   access: {

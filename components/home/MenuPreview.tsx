@@ -1,59 +1,95 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
 import { VideoLoop } from "@/components/shared/VideoLoop";
-import { featuredMenu } from "@/lib/content/menu";
+import type { MenuItemDisplay, MenuPreviewData } from "@/lib/menu";
 import { ArrowRight } from "lucide-react";
 
 /**
- * Acto 5 — Menu Preview. Names/descriptions sourced from lib/content/menu.ts.
+ * Acto 5 - Menu Preview. Names/descriptions come from Payload when CMS menu
+ * items are featured, with the original static content as a production fallback.
  * Every tile + list row links to the full /menu page (client request 2026-05-30).
  */
 
-// Supporting text-list highlights — real menu names spanning categories.
-const listItems = [
-  { name: "Award-Winning Gumbo", note: "Collard green, seafood, or chicken & sausage. First place at the Souper Bowl of Caring." },
-  { name: "Jambalaya", note: "Bold Creole rice with chicken, andouille, and the holy trinity. Shrimp or crawfish optional." },
-  { name: "Faydean's Creole Dirty Rice", note: "Seasoned pork and chicken, Creole spice, deep Southern flavor." },
-  { name: "Jean's Cajun Dirty Cabbage", note: "Cabbage and collards with smoked andouille and Cajun spice." },
-  { name: "Big Mama's Smoked Baked Beans", note: "Andouille, smoked pork, Cajun-Creole spice, BBQ glaze." },
-  { name: "Big Mama's Peach Cobbler", note: "Slow-baked spiced peaches under a caramelized lattice crust." },
-  { name: "Chef Dee's Cheesecake Banana Pudding", note: "Banana cheesecake custard, vanilla wafers, caramel drizzle." },
-] as const;
-
-// Macro video tiles (V4/V5/V6) — real names from the menu content.
-const macroTiles = [
+const fallbackFeatureMedia = [
+  {
+    src: "/video/v3-brisket.mp4",
+    poster: "/video/v3-brisket-poster.jpg",
+    alt: "Smoked brisket resting in drifting smoke",
+    fade: 0,
+  },
   {
     src: "/video/v4-pulled-pork.mp4",
     poster: "/video/v4-pulled-pork-poster.jpg",
     alt: "Smoked pulled pork resting with steam rising",
-    eyebrow: featuredMenu.pulledPork.tag,
-    title: featuredMenu.pulledPork.name,
-    short: featuredMenu.pulledPork.short,
-    fade: 0, // seamless crossfade loop baked into the file — no JS fade
+    fade: 0,
   },
   {
     src: "/video/v5-ribs.mp4",
     poster: "/video/v5-ribs-poster.jpg",
     alt: "Glazed smoked ribs with backlit smoke drifting",
-    eyebrow: featuredMenu.ribs.tag,
-    title: featuredMenu.ribs.name,
-    short: featuredMenu.ribs.short,
-    fade: 0, // seamless crossfade loop baked into the file — no JS fade
+    fade: 0,
   },
   {
     src: "/video/v6-mac.mp4",
     poster: "/video/v6-mac-poster.jpg",
     alt: "Three-cheese mac and cheese bubbling in a cast-iron skillet",
-    eyebrow: featuredMenu.mac.tag,
-    title: featuredMenu.mac.name,
-    short: featuredMenu.mac.short,
-    fade: 0, // seamless crossfade loop baked into the file — no JS fade
+    fade: 0,
   },
 ] as const;
 
-export function MenuPreview() {
+type FeatureMedia = (typeof fallbackFeatureMedia)[number];
+
+function FeatureBackdrop({
+  item,
+  media,
+}: {
+  item: MenuItemDisplay;
+  media?: FeatureMedia;
+}) {
+  if (item.image) {
+    return (
+      <Image
+        src={item.image.url}
+        alt={item.image.alt}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+      />
+    );
+  }
+
+  if (media) {
+    return (
+      <VideoLoop
+        src={media.src}
+        poster={media.poster}
+        ariaLabel={media.alt}
+        decorative
+        playWhenVisible
+        className="absolute inset-0"
+        loopFadeMs={media.fade}
+      />
+    );
+  }
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-hickory px-6 text-center font-display text-2xl text-parchment/60">
+      Big Bold BBQ
+    </div>
+  );
+}
+
+export function MenuPreview({ data }: { data: MenuPreviewData }) {
+  const [heroItem, ...tileItems] = data.featuredItems;
+  const isFallback = data.source === "fallback";
+
+  if (!heroItem) {
+    return null;
+  }
+
   return (
     <section
       id="menu"
@@ -71,23 +107,15 @@ export function MenuPreview() {
           </SectionHeading>
         </Reveal>
 
-        {/* V3 brisket feature tile → links to /menu */}
+        {/* Feature tile links to /menu */}
         <Reveal delay={120}>
           <div className="mt-12 grid gap-6 lg:grid-cols-[2fr_3fr] items-stretch max-w-5xl">
             <Link
               href="/menu"
-              aria-label={`${featuredMenu.brisket.name} — view the full menu`}
+              aria-label={`${heroItem.name} - view the full menu`}
               className="group aspect-square rounded-2xl overflow-hidden bg-charcoal relative shadow-2xl focus-visible:outline-2 focus-visible:outline-warmgold focus-visible:outline-offset-2"
             >
-              <VideoLoop
-                src="/video/v3-brisket.mp4"
-                poster="/video/v3-brisket-poster.jpg"
-                ariaLabel="Smoked brisket resting in drifting smoke"
-                decorative
-                playWhenVisible
-                className="absolute inset-0"
-                loopFadeMs={0}
-              />
+              <FeatureBackdrop item={heroItem} media={isFallback ? fallbackFeatureMedia[0] : undefined} />
               <div
                 aria-hidden
                 className="absolute inset-0 pointer-events-none transition-colors duration-300 group-hover:bg-firebrick/10"
@@ -97,14 +125,16 @@ export function MenuPreview() {
                 }}
               />
               <div className="absolute bottom-5 left-5 right-5 text-parchment">
-                <p className="text-warmgold uppercase tracking-[0.2em] text-[10px] font-bold">
-                  {featuredMenu.brisket.tag}
-                </p>
+                {heroItem.tag ? (
+                  <p className="text-warmgold uppercase tracking-[0.2em] text-[10px] font-bold">
+                    {heroItem.tag}
+                  </p>
+                ) : null}
                 <p className="font-display text-2xl md:text-3xl mt-1">
-                  {featuredMenu.brisket.name}
+                  {heroItem.name}
                 </p>
                 <p className="text-parchment/80 text-sm mt-1">
-                  {featuredMenu.brisket.short}
+                  {heroItem.homeSummary || heroItem.description}
                 </p>
               </div>
             </Link>
@@ -131,23 +161,18 @@ export function MenuPreview() {
           </div>
         </Reveal>
 
-        {/* V4 / V5 / V6 macro tiles → each links to /menu */}
+        {/* Featured tiles link to /menu */}
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl">
-          {macroTiles.map((tile, idx) => (
-            <Reveal key={tile.title} delay={idx * 80}>
+          {tileItems.slice(0, 3).map((item, idx) => (
+            <Reveal key={item.id} delay={idx * 80}>
               <Link
                 href="/menu"
-                aria-label={`${tile.title} — view the full menu`}
+                aria-label={`${item.name} - view the full menu`}
                 className="group block aspect-square rounded-xl overflow-hidden bg-charcoal relative shadow-lg focus-visible:outline-2 focus-visible:outline-warmgold focus-visible:outline-offset-2"
               >
-                <VideoLoop
-                  src={tile.src}
-                  poster={tile.poster}
-                  ariaLabel={tile.alt}
-                  decorative
-                  playWhenVisible
-                  className="absolute inset-0"
-                  loopFadeMs={tile.fade}
+                <FeatureBackdrop
+                  item={item}
+                  media={isFallback ? fallbackFeatureMedia[idx + 1] : undefined}
                 />
                 <div
                   aria-hidden
@@ -158,11 +183,13 @@ export function MenuPreview() {
                   }}
                 />
                 <div className="absolute bottom-4 left-4 right-4 text-parchment">
-                  <p className="text-warmgold uppercase tracking-[0.2em] text-[10px] font-bold">
-                    {tile.eyebrow}
-                  </p>
+                  {item.tag ? (
+                    <p className="text-warmgold uppercase tracking-[0.2em] text-[10px] font-bold">
+                      {item.tag}
+                    </p>
+                  ) : null}
                   <p className="font-display text-lg sm:text-xl mt-1 text-balance">
-                    {tile.title}
+                    {item.name}
                   </p>
                 </div>
               </Link>
@@ -172,7 +199,7 @@ export function MenuPreview() {
 
         {/* Text-list highlights → each row links to /menu */}
         <div className="mt-16 grid gap-px bg-hickory/15 max-w-4xl border border-hickory/15 rounded-lg overflow-hidden">
-          {listItems.map((item, idx) => (
+          {data.listItems.map((item, idx) => (
             <Reveal key={item.name} delay={idx * 50}>
               <Link
                 href="/menu"

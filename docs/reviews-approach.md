@@ -1,8 +1,8 @@
 # Why the site shows reviews the way it does
 
-**Short version:** we show only real, five-star reviews with their written
-comments, hand-placed into the site so we keep full control over quality,
-speed, and design. Here's the reasoning behind that choice.
+**Short version:** we show only real Google reviews with their written
+comments, curated in Payload CMS so we keep full control over quality, speed,
+and design. Here's the reasoning behind that choice.
 
 ## The goal
 
@@ -34,8 +34,8 @@ These auto-sync from Google, but:
 
 For a site built to feel premium and load fast, that's a poor trade.
 
-**3. Hand-curated reviews (what we chose).**
-Real reviews are placed into a single content file on the site as they come in.
+**3. CMS-curated reviews (what we chose).**
+Real reviews are added in Payload CMS as they come in.
 
 ## Why hand-curation is the right call here
 
@@ -52,8 +52,8 @@ Real reviews are placed into a single content file on the site as they come in.
 
 ## How it works day to day
 
-1. As five-star reviews come in on Google, we add each one (name, the review
-   text, and the date) to the site.
+1. As Google reviews come in, we add each one in Payload CMS with the name,
+   rating, review text, date, and optional event context.
 2. The section automatically switches from the "gathering reviews" state to a
    grid of review cards with a star rating.
 3. Add the Google Business Profile link once, and a "Review us on Google"

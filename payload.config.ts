@@ -2,12 +2,16 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { Authors } from "./collections/Authors.ts";
 import { BlogPosts } from "./collections/BlogPosts.ts";
 import { Categories } from "./collections/Categories.ts";
+import { GoogleReviews } from "./collections/GoogleReviews.ts";
 import { Media } from "./collections/Media.ts";
+import { MenuCategories } from "./collections/MenuCategories.ts";
+import { MenuItems } from "./collections/MenuItems.ts";
 import { Tags } from "./collections/Tags.ts";
 import { Users } from "./collections/Users.ts";
 
@@ -18,7 +22,17 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Media, Authors, Categories, Tags, BlogPosts],
+  collections: [
+    Users,
+    Media,
+    Authors,
+    Categories,
+    Tags,
+    BlogPosts,
+    GoogleReviews,
+    MenuCategories,
+    MenuItems,
+  ],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL,
@@ -28,6 +42,20 @@ export default buildConfig({
   graphQL: {
     disable: true,
   },
+  plugins: [
+    vercelBlobStorage({
+      addRandomSuffix: true,
+      alwaysInsertFields: true,
+      clientUploads: true,
+      collections: {
+        media: {
+          prefix: "media",
+        },
+      },
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
+  ],
   secret:
     process.env.PAYLOAD_SECRET ??
     "development-only-payload-secret-change-before-production",

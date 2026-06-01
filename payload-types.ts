@@ -73,6 +73,9 @@ export interface Config {
     categories: Category;
     tags: Tag;
     'blog-posts': BlogPost;
+    'google-reviews': GoogleReview;
+    'menu-categories': MenuCategory;
+    'menu-items': MenuItem;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +89,9 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    'google-reviews': GoogleReviewsSelect<false> | GoogleReviewsSelect<true>;
+    'menu-categories': MenuCategoriesSelect<false> | MenuCategoriesSelect<true>;
+    'menu-items': MenuItemsSelect<false> | MenuItemsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -158,6 +164,7 @@ export interface Media {
   id: number;
   alt: string;
   caption?: string | null;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -281,6 +288,94 @@ export interface BlogPost {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "google-reviews".
+ */
+export interface GoogleReview {
+  id: number;
+  author: string;
+  /**
+   * Use the exact Google rating. Five-star reviews are preferred for the homepage.
+   */
+  rating: number;
+  /**
+   * Paste the Google review text verbatim.
+   */
+  reviewText: string;
+  reviewDate: string;
+  /**
+   * Optional context shown under the name, for example: Wedding / 180 guests.
+   */
+  eventType?: string | null;
+  /**
+   * Optional link to the Google review or Business Profile.
+   */
+  googleUrl?: string | null;
+  isFeatured?: boolean | null;
+  /**
+   * Lower numbers appear first. Reviews with the same order use newest date first.
+   */
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-categories".
+ */
+export interface MenuCategory {
+  id: number;
+  title: string;
+  slug: string;
+  blurb?: string | null;
+  isVisible?: boolean | null;
+  /**
+   * Lower numbers appear first.
+   */
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-items".
+ */
+export interface MenuItem {
+  id: number;
+  name: string;
+  slug: string;
+  category: number | MenuCategory;
+  description: string;
+  /**
+   * Shown on the menu page and on the homepage when this item is featured.
+   */
+  image?: (number | null) | Media;
+  /**
+   * Short label, for example: Award-Winning, King of Meats, 3-2-1 Style.
+   */
+  tag?: string | null;
+  note?: string | null;
+  variants?:
+    | {
+        name: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  isVisible?: boolean | null;
+  showOnHome?: boolean | null;
+  /**
+   * Short text for the homepage preview. Falls back to the main description.
+   */
+  homeSummary?: string | null;
+  /**
+   * Lower numbers appear first within the category.
+   */
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -326,6 +421,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blog-posts';
         value: number | BlogPost;
+      } | null)
+    | ({
+        relationTo: 'google-reviews';
+        value: number | GoogleReview;
+      } | null)
+    | ({
+        relationTo: 'menu-categories';
+        value: number | MenuCategory;
+      } | null)
+    | ({
+        relationTo: 'menu-items';
+        value: number | MenuItem;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -398,6 +505,7 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -507,6 +615,61 @@ export interface BlogPostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "google-reviews_select".
+ */
+export interface GoogleReviewsSelect<T extends boolean = true> {
+  author?: T;
+  rating?: T;
+  reviewText?: T;
+  reviewDate?: T;
+  eventType?: T;
+  googleUrl?: T;
+  isFeatured?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-categories_select".
+ */
+export interface MenuCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  blurb?: T;
+  isVisible?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-items_select".
+ */
+export interface MenuItemsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  category?: T;
+  description?: T;
+  image?: T;
+  tag?: T;
+  note?: T;
+  variants?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        id?: T;
+      };
+  isVisible?: T;
+  showOnHome?: T;
+  homeSummary?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

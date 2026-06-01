@@ -3,6 +3,23 @@ import { menu } from "@/lib/content/menu";
 import { reviews, reviewStats } from "@/lib/content/reviews";
 
 type SchemaObject = Record<string, unknown>;
+type SchemaReview = {
+  author: string;
+  date: string;
+  rating: number;
+  text: string;
+};
+type SchemaReviewStats = {
+  average: number;
+  count: number;
+};
+type SchemaMenuSection = {
+  items: {
+    description: string;
+    name: string;
+  }[];
+  title: string;
+};
 
 export function JsonLd({ schema }: { schema: SchemaObject | SchemaObject[] }) {
   // Escape `<` to `<` so a stray "<" in content can't break out of the
@@ -16,19 +33,24 @@ export function JsonLd({ schema }: { schema: SchemaObject | SchemaObject[] }) {
   );
 }
 
-export function localBusinessSchema(): SchemaObject {
+export function localBusinessSchema(options?: {
+  reviewStats?: SchemaReviewStats;
+  reviews?: SchemaReview[];
+}): SchemaObject {
+  const schemaReviews = options?.reviews ?? reviews;
+  const schemaReviewStats = options?.reviewStats ?? reviewStats;
   // Only emit ratings when we have real, curated reviews — never fabricate.
   const reviewFragment =
-    reviews.length > 0
+    schemaReviews.length > 0
       ? {
           aggregateRating: {
             "@type": "AggregateRating",
-            ratingValue: reviewStats.average,
-            reviewCount: reviewStats.count,
+            ratingValue: schemaReviewStats.average,
+            reviewCount: schemaReviewStats.count,
             bestRating: 5,
             worstRating: 1,
           },
-          review: reviews.map((r) => ({
+          review: schemaReviews.map((r) => ({
             "@type": "Review",
             reviewRating: {
               "@type": "Rating",
@@ -94,14 +116,14 @@ export function personSchema(): SchemaObject {
 }
 
 /** Menu schema (no prices — catering is custom-quoted). Linked from LocalBusiness.hasMenu. */
-export function menuSchema(): SchemaObject {
+export function menuSchema(menuSections: SchemaMenuSection[] = menu): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "Menu",
     "@id": `${site.url}/menu#menu`,
     name: `${site.name} Catering Menu`,
     url: `${site.url}/menu`,
-    hasMenuSection: menu.map((cat) => ({
+    hasMenuSection: menuSections.map((cat) => ({
       "@type": "MenuSection",
       name: cat.title,
       hasMenuItem: cat.items.map((item) => ({
