@@ -2,6 +2,8 @@
 
 import { useEffect, type RefObject } from "react";
 
+const defaultShouldResume = () => true;
+
 /**
  * Mandatory pattern for any HTML5 <video autoPlay loop muted playsInline> background.
  *
@@ -24,7 +26,7 @@ import { useEffect, type RefObject } from "react";
  */
 export function useVideoMobileResume(
   videoRef: RefObject<HTMLVideoElement | null>,
-  shouldResume: () => boolean = () => true,
+  shouldResume: () => boolean = defaultShouldResume,
 ) {
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -33,7 +35,7 @@ export function useVideoMobileResume(
     const video = videoRef.current;
     if (!video) return;
 
-    let timers: number[] = [];
+    const timers: number[] = [];
     let wasHidden = document.hidden;
 
     function tryPlay(attempt = 0) {
@@ -89,5 +91,5 @@ export function useVideoMobileResume(
       document.removeEventListener("visibilitychange", onVisibilityChange);
       timers.forEach(window.clearTimeout);
     };
-  }, [videoRef]);
+  }, [shouldResume, videoRef]);
 }

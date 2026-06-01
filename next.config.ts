@@ -1,10 +1,14 @@
 import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   // Pin Turbopack root to this project so it ignores the parent monorepo lockfile.
   turbopack: {
-    root: path.resolve(__dirname),
+    root: path.resolve(dirname),
   },
   // Security headers — light pass for V1; tighten in M5 with full CSP.
   async headers() {
@@ -22,4 +26,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig, { devBundleServerPackages: false });

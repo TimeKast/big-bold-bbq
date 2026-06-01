@@ -214,3 +214,54 @@ html {
   font: inherit;
   color: var(--color-hickory, #3a2a1e);
 }
+
+/* Payload Lexical article output */
+.bbq-rich-text {
+  color: rgba(58, 42, 30, 0.86);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+.bbq-rich-text > * + * {
+  margin-top: 1.25rem;
+}
+.bbq-rich-text :where(h2, h3, h4) {
+  color: var(--color-hickory);
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-top: 2.25rem;
+}
+.bbq-rich-text h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+.bbq-rich-text h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+.bbq-rich-text :where(ul, ol) {
+  padding-left: 1.25rem;
+}
+.bbq-rich-text ul {
+  list-style: disc;
+}
+.bbq-rich-text ol {
+  list-style: decimal;
+}
+.bbq-rich-text :where(a) {
+  color: var(--color-firebrick);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.bbq-rich-text :where(blockquote) {
+  border-left: 4px solid var(--color-warmgold);
+  color: var(--color-hickory);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.35;
+  padding-left: 1.25rem;
+}
+.bbq-rich-text :where(img) {
+  border-radius: 8px;
+  height: auto;
+  max-width: 100%;
+}
