@@ -52,29 +52,34 @@ export function Hero() {
 
           <h1
             id="hero-title"
-            className="font-display font-black uppercase leading-[0.95] tracking-[-0.04em] text-balance"
+            className="font-display font-black uppercase leading-[0.95] tracking-[-0.02em] text-balance"
             style={{
-              fontSize: "clamp(3.25rem, 11vw, 8.5rem)",
+              fontSize: "clamp(3rem, 8vw, 6.75rem)",
               textShadow: "0 2px 30px rgba(0,0,0,0.55)",
             }}
           >
-            <span className="block text-parchment">Big flavor.</span>
-            <span
-              className="block text-firebrick"
-              style={{ textShadow: "0 2px 22px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.5)" }}
-            >
-              Real smoke.
-            </span>
+            <span className="block text-parchment">Southern BBQ Catering</span>
+            <span className="block text-firebrick">in Las Vegas</span>
           </h1>
 
+          <h2
+            className="mt-5 font-display font-black uppercase leading-none text-parchment text-balance"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4.25rem)",
+              textShadow: "0 2px 24px rgba(0,0,0,0.58)",
+            }}
+          >
+            Big Flavor. Real Smoke.
+          </h2>
+
           <p className="mt-8 text-lg sm:text-xl md:text-2xl text-parchment/85 max-w-2xl text-pretty leading-relaxed">
-            Award-winning Southern BBQ catering in Las Vegas with a Creole and
-            Cajun kick. Soulful catering for corporate events, weddings, and
-            private parties.
+            Authentic Creole and Cajun flavors inspired by over 100 years of
+            family recipes and Southern tradition.
           </p>
 
           <p className="mt-4 text-sm sm:text-base text-warmgold uppercase tracking-[0.18em] font-semibold">
-            Rooted in 100+ years of Southern tradition. Crafted by a female pitmaster.
+            Crafted by Chef Dee, an award-winning pitmaster and Souper Bowl of
+            Caring Champion.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
