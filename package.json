@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "payload generate:importmap && payload migrate && next build",
+    "build": "payload generate:importmap && next build",
     "start": "next start",
     "lint": "eslint",
+    "migrate": "payload migrate",
+    "migrate:status": "payload migrate:status",
     "payload": "payload",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap"

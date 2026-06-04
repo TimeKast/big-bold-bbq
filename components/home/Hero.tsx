@@ -63,10 +63,10 @@ export function Hero() {
           </h1>
 
           <h2
-            className="mt-5 font-display font-black uppercase leading-none text-parchment text-balance"
+            className="mt-5 font-display font-extrabold leading-tight text-parchment/95 text-balance"
             style={{
-              fontSize: "clamp(2rem, 5vw, 4.25rem)",
-              textShadow: "0 2px 24px rgba(0,0,0,0.58)",
+              fontSize: "clamp(1.65rem, 3vw, 2.8rem)",
+              textShadow: "0 2px 18px rgba(0,0,0,0.5)",
             }}
           >
             Big Flavor. Real Smoke.
