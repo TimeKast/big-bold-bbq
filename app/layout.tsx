@@ -22,10 +22,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — BBQ Catering Las Vegas | Southern, Creole & Cajun`,
+    default: "Chef Dee's Big Bold BBQ | BBQ Catering Las Vegas",
     template: `%s | ${site.name}`,
   },
-  description: site.description,
+  description:
+    "Award-winning BBQ catering in Las Vegas with authentic Southern BBQ, Creole cuisine, and Cajun favorites. Call Chef Dee's Big Bold BBQ for a fast quote.",
   applicationName: site.name,
   authors: [{ name: site.name }],
   keywords: [
@@ -42,22 +43,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: site.url,
-    title: site.name,
-    description: site.description,
+    title: "Chef Dee's Big Bold BBQ | BBQ Catering Las Vegas",
+    description:
+      "Award-winning BBQ catering in Las Vegas with authentic Southern BBQ, Creole cuisine, and Cajun favorites. Call Chef Dee's Big Bold BBQ for a fast quote.",
     siteName: site.name,
     images: [
       {
-        url: "/og-default.jpg",
+        url: "/images/social/chef-dees-big-bold-bbq-og.jpg",
         width: 1200,
         height: 630,
-        alt: `${site.name} — Las Vegas BBQ catering`,
+        alt: "Chef Dee's Big Bold BBQ catering in Las Vegas",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
-    description: site.description,
+    title: "Chef Dee's Big Bold BBQ | BBQ Catering Las Vegas",
+    description:
+      "Award-winning BBQ catering in Las Vegas with authentic Southern BBQ, Creole cuisine, and Cajun favorites. Call Chef Dee's Big Bold BBQ for a fast quote.",
     images: ["/og-default.jpg"],
   },
   robots: {

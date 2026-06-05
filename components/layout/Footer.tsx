@@ -71,7 +71,7 @@ export function Footer() {
             <ul className="flex flex-col gap-3 text-parchment/85">
               <li>
                 <Link
-                  href="/privacy"
+                  href="/privacy-policy"
                   className="hover:text-warmgold transition-colors"
                 >
                   Privacy Policy
@@ -79,7 +79,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href="/terms-of-service"
                   className="hover:text-warmgold transition-colors"
                 >
                   Terms of Service

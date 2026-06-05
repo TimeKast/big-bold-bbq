@@ -100,6 +100,83 @@ export function localBusinessSchema(options?: {
   };
 }
 
+export function sitewideSchema(): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "LocalBusiness", "FoodEstablishment"],
+        "@id": `${site.url}/#organization`,
+        name: site.name,
+        url: site.url,
+        logo: `${site.url}/icon-512.png`,
+        image: `${site.url}/og-default.jpg`,
+        description:
+          "Chef Dee's Big Bold BBQ provides award-winning BBQ catering in Las Vegas, specializing in authentic Southern BBQ, Creole cuisine, and Cajun favorites for corporate events, weddings, private parties, and live on-site BBQ experiences.",
+        telephone: site.phone.e164,
+        email: site.email,
+        priceRange: "$$",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: site.address.addressLocality,
+          addressRegion: site.address.addressRegion,
+          addressCountry: site.address.addressCountry,
+        },
+        areaServed: site.cities.map((city) => ({
+          "@type": "City",
+          name: city,
+        })),
+        servesCuisine: [
+          "Southern BBQ",
+          "Barbecue",
+          "Creole",
+          "Cajun",
+          "Southern Cuisine",
+        ],
+        sameAs: [
+          "https://www.facebook.com/BigBoldBBQ/",
+          "https://www.instagram.com/BigBoldBBQ/",
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: site.phone.e164,
+          contactType: "customer service",
+          areaServed: "US",
+          availableLanguage: "English",
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${site.url}/#website`,
+        url: site.url,
+        name: site.name,
+        publisher: {
+          "@id": `${site.url}/#organization`,
+        },
+      },
+    ],
+  };
+}
+
+export function homepageSchema(): SchemaObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${site.url}/#webpage`,
+    url: `${site.url}/`,
+    name: "Award-Winning BBQ Catering in Las Vegas",
+    description:
+      "Chef Dee's Big Bold BBQ offers award-winning Southern BBQ catering in Las Vegas with authentic Creole and Cajun flavor.",
+    isPartOf: { "@id": `${site.url}/#website` },
+    about: { "@id": `${site.url}/#organization` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: `${site.url}/photos/chef-dee.jpg`,
+    },
+    breadcrumb: breadcrumbSchema([{ name: "Home", url: `${site.url}/` }]),
+  };
+}
+
 /** Person schema for Chef Dee — injected on /about. */
 export function personSchema(): SchemaObject {
   return {
@@ -145,6 +222,37 @@ export function organizationSchema(): SchemaObject {
     url: site.url,
     logo: `${site.url}/icon-512.png`,
     sameAs: sameAs.length ? sameAs : undefined,
+  };
+}
+
+export function pageSchema({
+  type = "WebPage",
+  path,
+  name,
+  description,
+  breadcrumb,
+  about,
+}: {
+  type?: "AboutPage" | "ContactPage" | "WebPage";
+  path: string;
+  name: string;
+  description: string;
+  breadcrumb: { name: string; url: string }[];
+  about?: SchemaObject;
+}): SchemaObject {
+  const url = `${site.url}${path}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    isPartOf: { "@id": `${site.url}/#website` },
+    about: about ?? { "@id": `${site.url}/#organization` },
+    mainEntity: type === "ContactPage" ? { "@id": `${site.url}/#organization` } : undefined,
+    breadcrumb: breadcrumbSchema(breadcrumb),
   };
 }
 

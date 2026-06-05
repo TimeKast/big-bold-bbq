@@ -7,7 +7,7 @@ import { CtaButton } from "@/components/shared/CtaButton";
 import { PhoneLink } from "@/components/shared/PhoneLink";
 import { VideoLoop } from "@/components/shared/VideoLoop";
 import { Award } from "lucide-react";
-import { JsonLd, breadcrumbSchema, personSchema } from "@/components/seo/JsonLd";
+import { JsonLd, pageSchema, personSchema } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -39,10 +39,17 @@ export default function AboutPage() {
     <>
       <JsonLd
         schema={[
-          breadcrumbSchema([
-            { name: "Home", url: site.url },
-            { name: "About", url: `${site.url}/about` },
-          ]),
+          pageSchema({
+            type: "AboutPage",
+            path: "/about",
+            name: "About Chef Dee's Big Bold BBQ",
+            description:
+              "Learn about Chef Dee's Big Bold BBQ, an award-winning Las Vegas BBQ catering company rooted in over 100 years of Southern, Creole, and Cajun family food traditions.",
+            breadcrumb: [
+              { name: "Home", url: `${site.url}/` },
+              { name: "About", url: `${site.url}/about` },
+            ],
+          }),
           personSchema(),
         ]}
       />

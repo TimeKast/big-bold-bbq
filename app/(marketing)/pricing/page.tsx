@@ -3,6 +3,8 @@ import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
 import { PhoneLink } from "@/components/shared/PhoneLink";
+import { JsonLd, pageSchema } from "@/components/seo/JsonLd";
+import { site } from "@/lib/site";
 import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -38,6 +40,25 @@ const booking = [
 export default function PricingPage() {
   return (
     <>
+      <JsonLd
+        schema={pageSchema({
+          path: "/pricing",
+          name: "BBQ Catering Pricing in Las Vegas",
+          description:
+            "Request custom BBQ catering pricing in Las Vegas from Chef Dee's Big Bold BBQ for corporate events, weddings, private parties, and on-site BBQ experiences.",
+          about: {
+            "@type": "Service",
+            name: "BBQ Catering Pricing",
+            serviceType: "BBQ Catering",
+            provider: { "@id": `${site.url}/#organization` },
+            areaServed: site.cities,
+          },
+          breadcrumb: [
+            { name: "Home", url: `${site.url}/` },
+            { name: "Pricing", url: `${site.url}/pricing` },
+          ],
+        })}
+      />
       {/* Hero */}
       <section className="relative bg-charcoal text-parchment pt-40 pb-20 md:pt-48">
         <div aria-hidden className="absolute inset-0">

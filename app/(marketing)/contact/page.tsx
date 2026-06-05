@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
+import { JsonLd, pageSchema } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
 import { Mail, MapPin } from "lucide-react";
 
@@ -15,6 +16,19 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        schema={pageSchema({
+          type: "ContactPage",
+          path: "/contact",
+          name: "Contact Chef Dee's Big Bold BBQ",
+          description:
+            "Contact Chef Dee's Big Bold BBQ for award-winning BBQ catering in Las Vegas, including corporate catering, wedding catering, private events, and on-site BBQ experiences.",
+          breadcrumb: [
+            { name: "Home", url: `${site.url}/` },
+            { name: "Contact", url: `${site.url}/contact` },
+          ],
+        })}
+      />
       {/* Hero */}
       <section className="relative bg-charcoal text-parchment pt-40 pb-20 md:pt-48">
         <div aria-hidden className="absolute inset-0">

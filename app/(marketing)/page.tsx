@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JsonLd, localBusinessSchema } from "@/components/seo/JsonLd";
+import { JsonLd, homepageSchema, localBusinessSchema } from "@/components/seo/JsonLd";
 import { Hero } from "@/components/home/Hero";
 import { MeetChefDee } from "@/components/home/MeetChefDee";
 import { Services } from "@/components/home/Services";
@@ -13,9 +13,10 @@ import { getMenuPreviewData } from "@/lib/menu";
 import { getGoogleReviewsData } from "@/lib/reviews";
 
 export const metadata: Metadata = {
-  title: "BBQ Catering Las Vegas — Southern, Creole & Cajun",
+  title: { absolute: "Chef Dee's Big Bold BBQ | BBQ Catering Las Vegas" },
   description:
-    "Award-winning Southern, Creole, and Cajun BBQ catering in Las Vegas. Call now for a fast quote on your event.",
+    "Award-winning BBQ catering in Las Vegas with authentic Southern BBQ, Creole cuisine, and Cajun favorites. Call Chef Dee's Big Bold BBQ for a fast quote.",
+  alternates: { canonical: "https://bigboldbbq.com/" },
 };
 
 export const dynamic = "force-dynamic";
@@ -29,10 +30,13 @@ export default async function Home() {
   return (
     <>
       <JsonLd
-        schema={localBusinessSchema({
-          reviewStats: reviewsData.reviewStats,
-          reviews: reviewsData.reviews,
-        })}
+        schema={[
+          homepageSchema(),
+          localBusinessSchema({
+            reviewStats: reviewsData.reviewStats,
+            reviews: reviewsData.reviews,
+          }),
+        ]}
       />
       <Hero />
       <MeetChefDee />
