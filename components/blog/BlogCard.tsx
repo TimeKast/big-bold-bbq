@@ -28,6 +28,7 @@ export function BlogCard({ post }: { post: BlogPostWithRelations }) {
             src={imageUrl}
             alt={image?.alt ?? post.title}
             fill
+            unoptimized
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(min-width: 1024px) 360px, (min-width: 768px) 45vw, 100vw"
           />
