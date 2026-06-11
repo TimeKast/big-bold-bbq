@@ -261,7 +261,54 @@ html {
   padding-left: 1.25rem;
 }
 .bbq-rich-text :where(img) {
-  border-radius: 8px;
-  height: auto;
   max-width: 100%;
+}
+.bbq-rich-media {
+  --bbq-media-aspect-ratio: auto;
+  margin-inline: auto;
+}
+.bbq-rich-media--content {
+  width: 100%;
+}
+.bbq-rich-media--wide {
+  width: min(100vw - 2rem, 56rem);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.bbq-rich-media--full {
+  width: min(100vw - 2rem, 72rem);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.bbq-rich-media--framed {
+  aspect-ratio: var(--bbq-media-aspect-ratio);
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(58, 42, 30, 0.12);
+  background: rgba(58, 42, 30, 0.06);
+}
+.bbq-rich-media__image {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+}
+.bbq-rich-media:not(.bbq-rich-media--framed) .bbq-rich-media__image {
+  height: auto;
+}
+.bbq-rich-media--framed .bbq-rich-media__image {
+  height: 100%;
+}
+.bbq-rich-media__image--contain {
+  object-fit: contain;
+}
+.bbq-rich-media__image--cover {
+  object-fit: cover;
+}
+.bbq-rich-media figcaption {
+  margin-top: 0.65rem;
+  color: rgba(58, 42, 30, 0.58);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
 }
