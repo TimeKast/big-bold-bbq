@@ -14,7 +14,7 @@ export function BlogCard({ post }: { post: BlogPostWithRelations }) {
   const author = getRelationDoc<Author>(post.author);
   const category = getRelationDoc<Category>(post.category);
   const image = getRelationDoc<Media>(post.mainImage);
-  const imageUrl = getMediaUrl(image, "card");
+  const imageUrl = getMediaUrl(image);
 
   return (
     <article className="group grid overflow-hidden rounded-lg border border-hickory/15 bg-parchment-grain shadow-[0_18px_45px_rgba(43,30,22,0.08)] md:grid-cols-[minmax(240px,0.9fr)_1.1fr]">

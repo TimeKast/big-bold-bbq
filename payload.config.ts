@@ -85,7 +85,6 @@ export default buildConfig({
   },
   plugins: [
     vercelBlobStorage({
-      addRandomSuffix: true,
       alwaysInsertFields: true,
       clientUploads: true,
       collections: {

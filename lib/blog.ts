@@ -25,15 +25,15 @@ export function getRelationDoc<T extends { id: number | string }>(
   return null;
 }
 
-export function getMediaUrl(media: Media | null | undefined, size?: "card" | "hero") {
+export function getMediaUrl(media: Media | null | undefined) {
   if (!media) {
     return null;
   }
 
-  if (size && media.sizes?.[size]?.url) {
-    return media.sizes[size].url;
-  }
-
+  // Vercel Blob uploads in this project use random suffixes for the stored object.
+  // Payload's generated image-size URLs can point at the non-suffixed filenames,
+  // which 404s in production. Prefer the canonical media URL because it points at
+  // the actual stored blob for both existing and newly uploaded blog images.
   return media.url ?? null;
 }
 

@@ -273,7 +273,7 @@ export async function generateMetadata({
   }
 
   const image = getRelationDoc<Media>(post.mainImage);
-  const imageUrl = getMediaUrl(image, "hero") ?? "/og-default.jpg";
+  const imageUrl = getMediaUrl(image) ?? "/og-default.jpg";
   const title = post.seo?.title || `${post.title} — Big Bold BBQ Blog`;
   const description = post.seo?.description || post.description;
 
@@ -323,7 +323,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const author = getRelationDoc<Author>(post.author);
   const category = getRelationDoc<Category>(post.category);
   const image = getRelationDoc<Media>(post.mainImage);
-  const imageUrl = getMediaUrl(image, "hero");
+  const imageUrl = getMediaUrl(image);
   const tags = (post.tags ?? [])
     .map((item) => getRelationDoc<Tag>(item))
     .filter((item): item is Tag => Boolean(item));
