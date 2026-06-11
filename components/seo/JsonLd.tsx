@@ -2,7 +2,7 @@ import { site } from "@/lib/site";
 import { menu } from "@/lib/content/menu";
 import { reviews, reviewStats } from "@/lib/content/reviews";
 
-type SchemaObject = Record<string, unknown>;
+export type SchemaObject = Record<string, unknown>;
 type SchemaReview = {
   author: string;
   date: string;
@@ -67,7 +67,7 @@ export function localBusinessSchema(options?: {
   return {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "FoodEstablishment"],
-    "@id": `${site.url}/#business`,
+    "@id": `${site.url}/#localbusiness`,
     name: site.name,
     alternateName: site.shortName,
     description: site.description,
@@ -106,13 +106,24 @@ export function sitewideSchema(): SchemaObject {
     "@graph": [
       {
         "@type": ["Organization", "LocalBusiness", "FoodEstablishment"],
-        "@id": `${site.url}/#organization`,
+        "@id": `${site.url}/#localbusiness`,
         name: site.name,
-        url: site.url,
-        logo: `${site.url}/icon-512.png`,
-        image: `${site.url}/og-default.jpg`,
+        alternateName: site.shortName,
+        url: `${site.url}/`,
+        logo: {
+          "@type": "ImageObject",
+          "@id": `${site.url}/#logo`,
+          url: `${site.url}/icon-512.png`,
+          width: 512,
+          height: 512,
+        },
+        image: {
+          "@type": "ImageObject",
+          "@id": `${site.url}/#defaultimage`,
+          url: `${site.url}/og-default.jpg`,
+        },
         description:
-          "Chef Dee's Big Bold BBQ provides award-winning BBQ catering in Las Vegas, specializing in authentic Southern BBQ, Creole cuisine, and Cajun favorites for corporate events, weddings, private parties, and live on-site BBQ experiences.",
+          "Chef Dee's Big Bold BBQ provides authentic Southern BBQ, Creole-inspired dishes, and catering services for weddings, corporate events, private parties, and special events in Las Vegas.",
         telephone: site.phone.e164,
         email: site.email,
         priceRange: "$$",
@@ -122,10 +133,29 @@ export function sitewideSchema(): SchemaObject {
           addressRegion: site.address.addressRegion,
           addressCountry: site.address.addressCountry,
         },
-        areaServed: site.cities.map((city) => ({
-          "@type": "City",
-          name: city,
-        })),
+        areaServed: [
+          ...site.cities.map((city) => ({
+            "@type": "City",
+            name: city,
+          })),
+          {
+            "@type": "AdministrativeArea",
+            name: "Nevada",
+          },
+        ],
+        knowsAbout: [
+          "BBQ catering",
+          "Southern BBQ",
+          "Las Vegas catering",
+          "corporate catering",
+          "wedding catering",
+          "event catering",
+          "smoked brisket",
+          "pulled pork",
+          "ribs",
+          "Creole food",
+          "Cajun food",
+        ],
         servesCuisine: [
           "Southern BBQ",
           "Barbecue",
@@ -133,10 +163,7 @@ export function sitewideSchema(): SchemaObject {
           "Cajun",
           "Southern Cuisine",
         ],
-        sameAs: [
-          "https://www.facebook.com/BigBoldBBQ/",
-          "https://www.instagram.com/BigBoldBBQ/",
-        ],
+        sameAs: Object.values(site.social).filter(Boolean),
         contactPoint: {
           "@type": "ContactPoint",
           telephone: site.phone.e164,
@@ -146,12 +173,59 @@ export function sitewideSchema(): SchemaObject {
         },
       },
       {
+        "@type": "Person",
+        "@id": `${site.url}/#chef-dee`,
+        name: "Chef Dee",
+        image: {
+          "@type": "ImageObject",
+          url: `${site.url}/photos/chef-dee.jpg`,
+        },
+        jobTitle: "Pitmaster and BBQ Catering Expert",
+        worksFor: {
+          "@id": `${site.url}/#localbusiness`,
+        },
+        knowsAbout: [
+          "BBQ catering",
+          "Southern BBQ",
+          "smoked brisket",
+          "event catering",
+          "Las Vegas catering",
+          "Creole-inspired cooking",
+        ],
+      },
+      {
         "@type": "WebSite",
         "@id": `${site.url}/#website`,
-        url: site.url,
-        name: site.name,
+        url: `${site.url}/`,
+        name: site.shortName,
         publisher: {
-          "@id": `${site.url}/#organization`,
+          "@id": `${site.url}/#localbusiness`,
+        },
+        image: {
+          "@id": `${site.url}/#defaultimage`,
+        },
+      },
+      {
+        "@type": "Service",
+        "@id": `${site.url}/#bbq-catering-service`,
+        name: "BBQ Catering in Las Vegas",
+        serviceType: "BBQ Catering",
+        provider: {
+          "@id": `${site.url}/#localbusiness`,
+        },
+        areaServed: {
+          "@type": "City",
+          name: "Las Vegas",
+        },
+        description:
+          "Authentic BBQ catering for weddings, corporate events, private parties, backyard gatherings, and special events in Las Vegas.",
+        offers: {
+          "@type": "Offer",
+          url: `${site.url}/contact/`,
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          description:
+            "Custom BBQ catering quote based on guest count, menu selections, venue, and service style.",
         },
       },
     ],
@@ -168,7 +242,7 @@ export function homepageSchema(): SchemaObject {
     description:
       "Chef Dee's Big Bold BBQ offers award-winning Southern BBQ catering in Las Vegas with authentic Creole and Cajun flavor.",
     isPartOf: { "@id": `${site.url}/#website` },
-    about: { "@id": `${site.url}/#organization` },
+    about: { "@id": `${site.url}/#localbusiness` },
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: `${site.url}/photos/chef-dee.jpg`,
@@ -182,11 +256,11 @@ export function personSchema(): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${site.url}/about#chef-dee`,
+    "@id": `${site.url}/#chef-dee`,
     name: "Chef Dee",
     jobTitle: "Pitmaster & Chef",
     image: `${site.url}/photos/chef-dee.jpg`,
-    worksFor: { "@id": `${site.url}/#organization` },
+    worksFor: { "@id": `${site.url}/#localbusiness` },
     award: site.award.show ? site.award.name : undefined,
     knowsAbout: ["Southern BBQ", "Creole cuisine", "Cajun cuisine", "Smoked meats", "Gumbo"],
   };
@@ -217,7 +291,7 @@ export function organizationSchema(): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": `${site.url}/#organization`,
+    "@id": `${site.url}/#localbusiness`,
     name: site.name,
     url: site.url,
     logo: `${site.url}/icon-512.png`,
@@ -250,8 +324,8 @@ export function pageSchema({
     name,
     description,
     isPartOf: { "@id": `${site.url}/#website` },
-    about: about ?? { "@id": `${site.url}/#organization` },
-    mainEntity: type === "ContactPage" ? { "@id": `${site.url}/#organization` } : undefined,
+    about: about ?? { "@id": `${site.url}/#localbusiness` },
+    mainEntity: type === "ContactPage" ? { "@id": `${site.url}/#localbusiness` } : undefined,
     breadcrumb: breadcrumbSchema(breadcrumb),
   };
 }

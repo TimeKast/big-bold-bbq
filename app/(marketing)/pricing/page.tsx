@@ -50,7 +50,7 @@ export default function PricingPage() {
             "@type": "Service",
             name: "BBQ Catering Pricing",
             serviceType: "BBQ Catering",
-            provider: { "@id": `${site.url}/#organization` },
+            provider: { "@id": `${site.url}/#localbusiness` },
             areaServed: site.cities,
           },
           breadcrumb: [

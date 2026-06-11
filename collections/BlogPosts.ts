@@ -138,6 +138,14 @@ export const BlogPosts: CollectionConfig = {
                   maxLength: 160,
                 },
                 {
+                  name: "alternativeHeadline",
+                  type: "text",
+                  maxLength: 110,
+                  admin: {
+                    description: "Optional BlogPosting alternativeHeadline for answer engines/search.",
+                  },
+                },
+                {
                   name: "tags",
                   type: "array",
                   labels: {
@@ -148,6 +156,90 @@ export const BlogPosts: CollectionConfig = {
                     {
                       name: "tag",
                       type: "text",
+                      required: true,
+                    },
+                  ],
+                },
+                {
+                  name: "articleSections",
+                  type: "array",
+                  labels: {
+                    singular: "Article section",
+                    plural: "Article sections",
+                  },
+                  admin: {
+                    description: "Optional articleSection values. Falls back to category and tags.",
+                  },
+                  fields: [
+                    {
+                      name: "section",
+                      type: "text",
+                      required: true,
+                    },
+                  ],
+                },
+                {
+                  name: "aboutTopics",
+                  type: "array",
+                  labels: {
+                    singular: "About topic",
+                    plural: "About topics",
+                  },
+                  admin: {
+                    description: "Optional Thing names for BlogPosting.about. The BBQ catering service is included automatically.",
+                  },
+                  fields: [
+                    {
+                      name: "topic",
+                      type: "text",
+                      required: true,
+                    },
+                  ],
+                },
+                {
+                  name: "mentions",
+                  type: "array",
+                  labels: {
+                    singular: "Mention",
+                    plural: "Mentions",
+                  },
+                  admin: {
+                    description: "Optional menu items/topics actually mentioned in the article.",
+                  },
+                  fields: [
+                    {
+                      name: "name",
+                      type: "text",
+                      required: true,
+                    },
+                    {
+                      name: "schemaType",
+                      type: "select",
+                      defaultValue: "Thing",
+                      options: ["Thing", "MenuItem"],
+                      required: true,
+                    },
+                  ],
+                },
+                {
+                  name: "faqs",
+                  type: "array",
+                  labels: {
+                    singular: "FAQ",
+                    plural: "FAQs",
+                  },
+                  admin: {
+                    description: "Optional per-article Q&A. If populated, the page displays it and emits FAQPage JSON-LD.",
+                  },
+                  fields: [
+                    {
+                      name: "question",
+                      type: "text",
+                      required: true,
+                    },
+                    {
+                      name: "answer",
+                      type: "textarea",
                       required: true,
                     },
                   ],

@@ -275,9 +275,51 @@ export interface BlogPost {
   seo?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Optional BlogPosting alternativeHeadline for answer engines/search.
+     */
+    alternativeHeadline?: string | null;
     tags?:
       | {
           tag: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Optional articleSection values. Falls back to category and tags.
+     */
+    articleSections?:
+      | {
+          section: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Optional Thing names for BlogPosting.about. The BBQ catering service is included automatically.
+     */
+    aboutTopics?:
+      | {
+          topic: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Optional menu items/topics actually mentioned in the article.
+     */
+    mentions?:
+      | {
+          name: string;
+          schemaType: 'Thing' | 'MenuItem';
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Optional per-article Q&A. If populated, the page displays it and emits FAQPage JSON-LD.
+     */
+    faqs?:
+      | {
+          question: string;
+          answer: string;
           id?: string | null;
         }[]
       | null;
@@ -605,10 +647,37 @@ export interface BlogPostsSelect<T extends boolean = true> {
     | {
         title?: T;
         description?: T;
+        alternativeHeadline?: T;
         tags?:
           | T
           | {
               tag?: T;
+              id?: T;
+            };
+        articleSections?:
+          | T
+          | {
+              section?: T;
+              id?: T;
+            };
+        aboutTopics?:
+          | T
+          | {
+              topic?: T;
+              id?: T;
+            };
+        mentions?:
+          | T
+          | {
+              name?: T;
+              schemaType?: T;
+              id?: T;
+            };
+        faqs?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
               id?: T;
             };
       };
