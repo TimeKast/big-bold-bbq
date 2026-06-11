@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
-import { VideoLoop } from "@/components/shared/VideoLoop";
 import type { MenuItemDisplay, MenuPreviewData } from "@/lib/menu";
 import { ArrowRight } from "lucide-react";
 
@@ -15,32 +14,46 @@ import { ArrowRight } from "lucide-react";
 
 const fallbackFeatureMedia = [
   {
-    src: "/video/v3-brisket.mp4",
-    poster: "/video/v3-brisket-poster.jpg",
-    alt: "Smoked brisket resting in drifting smoke",
-    fade: 0,
+    src: "/photos/menu/brisket.jpg",
+    alt: "Sliced smoked brisket with dark bark and a pink smoke ring",
   },
   {
-    src: "/video/v4-pulled-pork.mp4",
-    poster: "/video/v4-pulled-pork-poster.jpg",
-    alt: "Smoked pulled pork resting with steam rising",
-    fade: 0,
+    src: "/photos/menu/pulled-pork.jpg",
+    alt: "Pile of hand-pulled smoked pork with charred bark pieces",
   },
   {
-    src: "/video/v5-ribs.mp4",
-    poster: "/video/v5-ribs-poster.jpg",
-    alt: "Glazed smoked ribs with backlit smoke drifting",
-    fade: 0,
+    src: "/photos/menu/ribs.jpg",
+    alt: "Glazed baby back ribs with smoky bark on a wooden board",
   },
   {
-    src: "/video/v6-mac.mp4",
-    poster: "/video/v6-mac-poster.jpg",
-    alt: "Three-cheese mac and cheese bubbling in a cast-iron skillet",
-    fade: 0,
+    src: "/photos/menu/mac-n-cheese.jpg",
+    alt: "Baked Southern mac and cheese bubbling in a skillet",
   },
 ] as const;
 
 type FeatureMedia = (typeof fallbackFeatureMedia)[number];
+
+function getFallbackFeatureMedia(item: MenuItemDisplay, fallbackIndex: number): FeatureMedia | undefined {
+  const name = item.name.toLowerCase();
+
+  if (name.includes("brisket")) {
+    return fallbackFeatureMedia[0];
+  }
+
+  if (name.includes("pulled pork")) {
+    return fallbackFeatureMedia[1];
+  }
+
+  if (name.includes("ribs")) {
+    return fallbackFeatureMedia[2];
+  }
+
+  if (name.includes("mac") || name.includes("cheese")) {
+    return fallbackFeatureMedia[3];
+  }
+
+  return fallbackFeatureMedia[fallbackIndex];
+}
 
 function FeatureBackdrop({
   item,
@@ -63,14 +76,12 @@ function FeatureBackdrop({
 
   if (media) {
     return (
-      <VideoLoop
+      <Image
         src={media.src}
-        poster={media.poster}
-        ariaLabel={media.alt}
-        decorative
-        playWhenVisible
-        className="absolute inset-0"
-        loopFadeMs={media.fade}
+        alt={media.alt}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
       />
     );
   }
@@ -84,7 +95,6 @@ function FeatureBackdrop({
 
 export function MenuPreview({ data }: { data: MenuPreviewData }) {
   const [heroItem, ...tileItems] = data.featuredItems;
-  const isFallback = data.source === "fallback";
 
   if (!heroItem) {
     return null;
@@ -115,7 +125,7 @@ export function MenuPreview({ data }: { data: MenuPreviewData }) {
               aria-label={`${heroItem.name} - view the full menu`}
               className="group aspect-square rounded-2xl overflow-hidden bg-charcoal relative shadow-2xl focus-visible:outline-2 focus-visible:outline-warmgold focus-visible:outline-offset-2"
             >
-              <FeatureBackdrop item={heroItem} media={isFallback ? fallbackFeatureMedia[0] : undefined} />
+              <FeatureBackdrop item={heroItem} media={getFallbackFeatureMedia(heroItem, 0)} />
               <div
                 aria-hidden
                 className="absolute inset-0 pointer-events-none transition-colors duration-300 group-hover:bg-firebrick/10"
@@ -172,7 +182,7 @@ export function MenuPreview({ data }: { data: MenuPreviewData }) {
               >
                 <FeatureBackdrop
                   item={item}
-                  media={isFallback ? fallbackFeatureMedia[idx + 1] : undefined}
+                  media={getFallbackFeatureMedia(item, idx + 1)}
                 />
                 <div
                   aria-hidden
