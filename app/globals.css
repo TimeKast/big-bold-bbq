@@ -265,7 +265,11 @@ html {
 }
 .bbq-rich-media {
   --bbq-media-aspect-ratio: auto;
+  --bbq-media-natural-width: 100%;
   margin-inline: auto;
+}
+.bbq-rich-media--image {
+  width: min(100%, var(--bbq-media-natural-width));
 }
 .bbq-rich-media--content {
   width: 100%;

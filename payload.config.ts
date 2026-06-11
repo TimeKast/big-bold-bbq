@@ -131,6 +131,10 @@ export default buildConfig({
                 defaultValue: "content",
                 options: [
                   {
+                    label: "Image natural width",
+                    value: "image",
+                  },
+                  {
                     label: "Content width",
                     value: "content",
                   },
@@ -145,7 +149,7 @@ export default buildConfig({
                 ],
                 admin: {
                   description:
-                    "How wide this image should render inside the blog article.",
+                    "How wide this image should render inside the blog article. Image natural width lets the container shrink to the uploaded image size.",
                 },
               },
             ],

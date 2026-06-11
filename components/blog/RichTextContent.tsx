@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 type BlogImageFit = "contain" | "cover";
 type BlogImageAspectRatio = "auto" | "16:9" | "4:3" | "1:1";
-type BlogImageDisplayWidth = "content" | "wide" | "full";
+type BlogImageDisplayWidth = "image" | "content" | "wide" | "full";
 
 type UploadDoc = {
   alt?: string | null;
@@ -28,12 +28,17 @@ type UploadNode = {
   value?: unknown;
 };
 
-function getAspectStyle(aspectRatio: BlogImageAspectRatio): CSSProperties | undefined {
+function getMediaStyle(upload: UploadDoc, aspectRatio: BlogImageAspectRatio): CSSProperties {
+  const style = {
+    "--bbq-media-natural-width": upload.width ? `${upload.width}px` : "100%",
+  } as CSSProperties;
+
   if (aspectRatio === "auto") {
-    return undefined;
+    return style;
   }
 
   return {
+    ...style,
     "--bbq-media-aspect-ratio": aspectRatio.replace(":", " / "),
   } as CSSProperties;
 }
@@ -79,7 +84,7 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
           `bbq-rich-media--${displayWidth}`,
           aspectRatio !== "auto" && "bbq-rich-media--framed",
         )}
-        style={getAspectStyle(aspectRatio)}
+        style={getMediaStyle(upload, aspectRatio)}
       >
         {/* eslint-disable-next-line @next/next/no-img-element -- Payload/Vercel Blob media uses canonical URLs; Next optimization can break on long /api/media paths. */}
         <img
