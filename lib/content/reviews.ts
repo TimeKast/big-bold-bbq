@@ -25,6 +25,7 @@ export type Review = {
   text: string;
   date: string; // ISO yyyy-mm-dd
   eventType?: string; // e.g. "Wedding · 180 guests"
+  googleUrl?: string; // optional direct Google review / Business Profile link
 };
 
 export const reviews: Review[] = [

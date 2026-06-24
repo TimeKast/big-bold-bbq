@@ -67,10 +67,15 @@ export const site = {
 
   // Google Business Profile. `url` powers the "Review us on Google" CTA and
   // the "Read all reviews" link — paste the GBP share link when available
-  // (PENDING.md P1 #8). Real reviews themselves live in lib/content/reviews.ts;
-  // the rating/count below are derived from that file, not hardcoded.
+  // (PENDING.md P1 #8). Rating/count are loaded from Google Places when
+  // GOOGLE_PLACES_API_KEY + GOOGLE_PLACE_ID are configured. `fallbackStats`
+  // keeps the public count honest until those credentials are available.
   googleReviews: {
     url: "",
+    fallbackStats: {
+      average: 5,
+      count: 17,
+    },
   },
 
   // Order per client (2026-05-30): Home > About > Menu > Pricing > Contact > Blog

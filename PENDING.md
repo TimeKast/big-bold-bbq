@@ -2,7 +2,7 @@
 
 > Items waiting on the client (Chef Dee / business owner) before specific milestones can ship. Share this file directly with the client — each item has the question, why it matters, and what blocks if missing.
 
-**Last updated:** 2026-06-01 (Payload CMS + Vercel Blob ready, production domain live)
+**Last updated:** 2026-06-24 (Google reviews carousel + dynamic rating/count support ready; Payload CMS + Vercel Blob ready, production domain live)
 **Plan reference:** `/Users/bob/.claude/plans/big-bold-bbq-client-revisions-20260530.md`
 
 ---
@@ -79,12 +79,10 @@
 - **Default if missing:** show the badge with subtler copy (e.g., "Award-winning gumbo" without specific event name) until we have proof to cite.
 
 ### 8. Google Business Profile + real reviews ⬅️ NOW THE #1 CONTENT GAP
-- **Question:** Does Chef Dee have an active Google Business Profile? What's the **share link** (the `g.page/...` or `maps.app.goo.gl/...` URL)? As real 5-star reviews come in, send us the **reviewer name + the review text + the date** for each.
-- **What's built (2026-05-30):** The fake marquee quotes are GONE. The reviews section now runs on a hand-curation system (`lib/content/reviews.ts`). Today it shows an honest "we're gathering reviews" state — no invented quotes. The moment you:
-  1. paste the **GBP share link** into `lib/site.ts` → a "Review us on Google" button appears, and
-  2. paste **real 5-star reviews** into `lib/content/reviews.ts` → the section flips to premium review cards + a star rating, and Google rich-snippet markup (`AggregateRating` + `Review`) turns on automatically.
-- **Why it matters:** This is the highest-impact remaining content item. Reviews drive both conversion and local SEO. We will never fabricate them.
-- **What we need from you:** (a) the GBP share link, (b) real 5-star reviews as they arrive (text + name + date).
+- **Question:** Does Chef Dee have an active Google Business Profile? What's the **share link** (the `g.page/...` or `maps.app.goo.gl/...` URL)? For fully dynamic rating/count, we also need the Google **Place ID** and a Places API key configured in Vercel as `GOOGLE_PLACE_ID` + `GOOGLE_PLACES_API_KEY`. As real 5-star reviews come in, send us the **reviewer name + the review text + the date** for each.
+- **What's built (2026-06-24):** The homepage reviews section is now a horizontal auto-scrolling carousel. Payload's `googleUrl` field is surfaced on each card as a clickable Google review link. The public aggregate text reads from Google Places when credentials are configured; until then it uses the confirmed manual fallback `5.0 from 17 Google reviews`.
+- **Why it matters:** Reviews drive both conversion and local SEO. We will never fabricate them.
+- **What we need from you:** (a) the GBP share link, (b) Google Place ID / API credentials for live count sync, (c) real 5-star reviews as they arrive (text + name + date).
 
 ### 9. Social media handles
 - **Question:** Instagram, TikTok, Facebook, YouTube, Twitter/X — what handles exist?

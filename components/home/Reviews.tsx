@@ -1,13 +1,14 @@
 import { Reveal } from "@/components/shared/Reveal";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { CtaButton } from "@/components/shared/CtaButton";
-import { Star } from "lucide-react";
+import { ExternalLink, Star } from "lucide-react";
 import { site } from "@/lib/site";
-import type { GoogleReviewsData } from "@/lib/reviews";
+import type { GoogleReviewDisplay, GoogleReviewsData } from "@/lib/reviews";
 
 /**
- * Acto 7 - Reviews. Real Google reviews are curated in Payload. While the CMS
- * has no featured reviews, an honest "gathering reviews" state shows instead.
+ * Acto 7 - Reviews. Real Google reviews are curated in Payload. The aggregate
+ * rating/count comes from Google Places when configured, with a truthful manual
+ * fallback while credentials are pending.
  */
 
 function Stars({ className = "", rating = 5 }: { className?: string; rating?: number }) {
@@ -26,16 +27,64 @@ function Stars({ className = "", rating = 5 }: { className?: string; rating?: nu
   );
 }
 
+function ReviewCard({
+  review,
+  linkEnabled = true,
+}: {
+  review: GoogleReviewDisplay;
+  linkEnabled?: boolean;
+}) {
+  const card = (
+    <figure className="h-full min-h-[320px] w-[min(84vw,24rem)] shrink-0 flex flex-col rounded-2xl bg-parchment-grain border border-hickory/12 p-7 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
+      <div className="flex items-start justify-between gap-4">
+        <Stars rating={review.rating} />
+        {review.googleUrl && linkEnabled ? (
+          <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.18em] text-firebrick">
+            Read
+            <ExternalLink className="size-3" aria-hidden />
+          </span>
+        ) : null}
+      </div>
+      <blockquote className="mt-4 flex-1 text-hickory/85 text-lg leading-relaxed text-pretty">
+        &ldquo;{review.text}&rdquo;
+      </blockquote>
+      <figcaption className="mt-5 pt-5 border-t border-hickory/12">
+        <p className="font-display text-lg text-hickory">{review.author}</p>
+        {review.eventType ? (
+          <p className="text-hickory/60 text-sm mt-0.5">{review.eventType}</p>
+        ) : null}
+      </figcaption>
+    </figure>
+  );
+
+  if (!review.googleUrl || !linkEnabled) {
+    return card;
+  }
+
+  return (
+    <a
+      href={review.googleUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block rounded-2xl focus-visible:outline-firebrick"
+      aria-label={`Read ${review.author}'s Google review`}
+    >
+      {card}
+    </a>
+  );
+}
+
 export function Reviews({ data }: { data: GoogleReviewsData }) {
   const { reviews, reviewStats } = data;
   const hasReviews = reviews.length > 0;
   const googleUrl = site.googleReviews.url;
+  const carouselReviews = reviews.length > 1 ? [...reviews, ...reviews] : reviews;
 
   return (
     <section
       id="reviews"
       aria-labelledby="reviews-title"
-      className="bg-parchment text-hickory py-24 md:py-32"
+      className="bg-parchment text-hickory py-24 md:py-32 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>
@@ -66,24 +115,25 @@ export function Reviews({ data }: { data: GoogleReviewsData }) {
               </div>
             </Reveal>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {reviews.map((r, idx) => (
-                <Reveal key={`${r.author}-${idx}`} delay={idx * 60}>
-                  <figure className="h-full flex flex-col rounded-2xl bg-parchment-grain border border-hickory/12 p-7 shadow-sm">
-                    <Stars rating={r.rating} />
-                    <blockquote className="mt-4 flex-1 text-hickory/85 text-lg leading-relaxed text-pretty">
-                      &ldquo;{r.text}&rdquo;
-                    </blockquote>
-                    <figcaption className="mt-5 pt-5 border-t border-hickory/12">
-                      <p className="font-display text-lg text-hickory">{r.author}</p>
-                      {r.eventType ? (
-                        <p className="text-hickory/60 text-sm mt-0.5">{r.eventType}</p>
-                      ) : null}
-                    </figcaption>
-                  </figure>
-                </Reveal>
-              ))}
-            </div>
+            <Reveal>
+              <div className="relative mt-12 -mx-4 sm:-mx-6 lg:mx-0">
+                <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-parchment to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-parchment to-transparent" />
+                <div className="overflow-hidden py-2" aria-label="Featured Google reviews carousel">
+                  <div className="marquee flex w-max gap-6 px-4 sm:px-6 lg:px-0">
+                    {carouselReviews.map((review, idx) => {
+                      const isDuplicate = idx >= reviews.length;
+
+                      return (
+                        <div key={`${review.id}-${idx}`} aria-hidden={isDuplicate || undefined}>
+                          <ReviewCard review={review} linkEnabled={!isDuplicate} />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
 
             {googleUrl ? (
               <Reveal>
