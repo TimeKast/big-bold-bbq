@@ -35,7 +35,7 @@ function ReviewCard({
   linkEnabled?: boolean;
 }) {
   const card = (
-    <figure className="h-full min-h-[320px] w-[min(84vw,24rem)] shrink-0 flex flex-col rounded-2xl bg-parchment-grain border border-hickory/12 p-7 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
+    <figure className="h-[22rem] w-[min(84vw,24rem)] shrink-0 flex flex-col rounded-2xl bg-parchment-grain border border-hickory/12 p-7 shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md">
       <div className="flex items-start justify-between gap-4">
         <Stars rating={review.rating} />
         {review.googleUrl && linkEnabled ? (
@@ -45,7 +45,7 @@ function ReviewCard({
           </span>
         ) : null}
       </div>
-      <blockquote className="mt-4 flex-1 text-hickory/85 text-lg leading-relaxed text-pretty">
+      <blockquote className="mt-4 flex-1 overflow-hidden text-hickory/85 text-lg leading-relaxed text-pretty line-clamp-7">
         &ldquo;{review.text}&rdquo;
       </blockquote>
       <figcaption className="mt-5 pt-5 border-t border-hickory/12">
@@ -84,7 +84,7 @@ export function Reviews({ data }: { data: GoogleReviewsData }) {
     <section
       id="reviews"
       aria-labelledby="reviews-title"
-      className="bg-parchment text-hickory py-24 md:py-32 overflow-hidden"
+      className="bg-parchment text-hickory pt-24 pb-8 md:pt-32 md:pb-12 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <Reveal>

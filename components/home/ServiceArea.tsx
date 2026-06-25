@@ -14,7 +14,7 @@ export function ServiceArea() {
     <section
       id="service-area"
       aria-labelledby="area-title"
-      className="bg-parchment text-hickory py-24 md:py-32"
+      className="bg-parchment text-hickory pt-8 pb-24 md:pt-12 md:pb-32"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Subgrid so both headings share a row and the map + steps start at the
