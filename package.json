@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "payload generate:importmap && next build",
-    "start": "next start",
+    "start": "node scripts/tools/with-vault.mjs next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -72,5 +72,6 @@
     "typescript": "^5",
     "vitest": "^5.0.2"
   },
-  "agentKitVersion": "13.0.1"
+  "agentKitVersion": "13.0.1",
+  "packageManager": "pnpm@10.24.0"
 }

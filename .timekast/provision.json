@@ -1,0 +1,24 @@
+{
+  "lifecycle": "live",
+  "slug": "big-bold-bbq",
+  "vercelProjectId": "prj_BddUb72NarnN07TFDsfWD47PJppC",
+  "neonProjectId": "dark-recipe-20218111",
+  "neonOrgId": "org-crimson-term-80666909",
+  "neonBranchDevId": "br-bitter-tooth-aq5bwlvb",
+  "githubRepo": "TimeKast/big-bold-bbq",
+  "domains": {
+    "dev": "unknown",
+    "prod": "unknown"
+  },
+  "adoptedAt": "2026-09-27T02:52:49.635Z",
+  "vault": {
+    "projectId": "f7045601-4355-4b0e-b5b8-27e357274d38",
+    "envs": {
+      "main": "main",
+      "develop": "develop",
+      "local": "local"
+    },
+    "done": true,
+    "vercelProjectId": "prj_BddUb72NarnN07TFDsfWD47PJppC"
+  }
+}
