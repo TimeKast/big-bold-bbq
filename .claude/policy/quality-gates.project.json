@@ -1,0 +1,33 @@
+{
+  "panel_by_risk": { "0": [], "1": [], "2": [], "3": [], "4": [] },
+  "rules": [
+    {
+      "when": {
+        "paths": ["collections/**"]
+      },
+      "risk": 3,
+      "require": ["security-auditor", "architect"]
+    },
+    {
+      "when": {
+        "paths": ["collections/Users.ts", "collections/access.ts", "collections/hooks/**"]
+      },
+      "risk": 4,
+      "require": ["security-auditor", "architect"]
+    },
+    {
+      "when": {
+        "paths": ["app/api/**"]
+      },
+      "risk": 3,
+      "require": ["security-auditor"]
+    },
+    {
+      "when": {
+        "paths": ["proxy.ts"]
+      },
+      "risk": 4,
+      "require": ["security-auditor", "architect"]
+    }
+  ]
+}

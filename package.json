@@ -8,11 +8,33 @@
     "build": "payload generate:importmap && next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "migrate": "payload migrate",
     "migrate:status": "payload migrate:status",
     "payload": "payload",
     "generate:types": "payload generate:types",
-    "generate:importmap": "payload generate:importmap"
+    "generate:importmap": "payload generate:importmap",
+    "factory:update": "npx @timekast/factory update",
+    "factory:doctor": "npx @timekast/factory doctor",
+    "factory:status": "npx @timekast/factory status",
+    "factory:publish": "npx @timekast/factory publish",
+    "factory:unpublish": "npx @timekast/factory unpublish",
+    "env:push": "npx @timekast/factory env push",
+    "preflight": "tsx scripts/tools/preflight.ts",
+    "invite:admin": "npx @timekast/factory invite-admin",
+    "setup:e2e:vars": "node scripts/tools/with-vault.mjs --vault-env=develop tsx scripts/tools/setup-e2e.ts --publish-vars",
+    "e2e:setup": "playwright install chromium",
+    "evidence:visual": "pnpm test:e2e --project=evidence",
+    "generate:inventory": "tsx scripts/tools/generate-inventory.ts",
+    "generate:codebase": "tsx scripts/tools/generate-codebase.ts",
+    "generate:hooks": "tsx scripts/tools/generate-hooks.ts",
+    "generate:schema": "tsx scripts/tools/generate-schema.ts",
+    "generate:api": "tsx scripts/tools/generate-api.ts",
+    "generate:reference": "tsx scripts/tools/generate-inventory.ts && tsx scripts/tools/generate-codebase.ts && tsx scripts/tools/generate-hooks.ts && tsx scripts/tools/generate-schema.ts && tsx scripts/tools/generate-api.ts",
+    "verify": "node scripts/tools/verify.mjs",
+    "verify:quick": "node scripts/tools/verify.mjs --quick",
+    "dev:next": "NODE_OPTIONS='--max-old-space-size=4096' next dev --turbopack"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -45,7 +67,10 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "prettier": "^3.9.9",
     "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "typescript": "^5",
+    "vitest": "^5.0.2"
+  },
+  "agentKitVersion": "13.0.1"
 }

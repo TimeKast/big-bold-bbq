@@ -1,4 +1,5 @@
 @AGENTS.md
+@.claude/rules/INDEX.md
 
 # Chef Dee's Big Bold BBQ — Project Notes
 

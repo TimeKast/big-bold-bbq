@@ -32,5 +32,17 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "vitest.setup.ts",
+    "scripts/tools/board-status.ts",
+    "scripts/tools/db-query.ts",
+    "scripts/tools/e2e-runner.ts",
+    "scripts/tools/env-check.ts",
+    "scripts/tools/invite-admin.ts",
+    "scripts/tools/setup-e2e.ts",
+    "scripts/tools/visual-evidence/**",
+    "scripts/tools/skill-lint/**",
+    "scripts/tools/update-board.ts"
+  ]
 }
