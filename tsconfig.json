@@ -39,6 +39,7 @@
     "scripts/tools/db-query.ts",
     "scripts/tools/e2e-runner.ts",
     "scripts/tools/env-check.ts",
+    "scripts/tools/generate-email-logo.ts",
     "scripts/tools/invite-admin.ts",
     "scripts/tools/setup-e2e.ts",
     "scripts/tools/visual-evidence/**",
